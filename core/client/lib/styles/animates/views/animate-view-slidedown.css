@@ -1,0 +1,25 @@
+/* http://dfsq.github.io/ngView-animation-effects/app/#/code */
+.animate-view-slidedown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.animate-view-slidedown.ng-enter,
+.animate-view-slidedown.ng-leave {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.animate-view-slidedown.ng-enter {
+    top: -100%;
+}
+.animate-view-slidedown.ng-enter-active {
+    top: 0;
+}
+.animate-view-slidedown.ng-leave {
+    top: 0;
+}
+.animate-view-slidedown.ng-leave-active {
+    top: 100%;
+}

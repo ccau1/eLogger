@@ -1,0 +1,9 @@
+<change-username></change-username>
+
+<md-button ng-click="showChangePassword()" ng-if="!showChangePasswordView" class="md-raised">Change Password</md-button>
+<div ng-if="showChangePasswordView">
+    <h4>Change Password</h4>
+    <change-password></change-password>
+</div>
+<h4>Additional Information</h4>
+<user-profile-settings></user-profile-settings>

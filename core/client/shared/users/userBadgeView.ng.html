@@ -1,0 +1,5 @@
+﻿<md-badge aria-label="{{user.roles['default-group'][0]}}">
+    <!--<md-icon class="material-icons" style="color: #A9A9A9;margin:-2px 5px 0 -5px;">{{getRoleIcon(user.roles['default-group'])}}</md-icon>-->
+    <user-avatar diameter="40" allow-set="true" ng-model="user"></user-avatar>
+    <span>{{user.profile.name}}</span>
+</md-badge>

@@ -1,0 +1,17 @@
+﻿<md-dialog aria-label="Log List" ng-cloak flex="50">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{title}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Cancel">
+                <ng-md-icon icon="close" style="fill: #fff;"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <!--<h5>VPR Log</h5>-->
+            <user-avatar-form ng-model="formObj" on-submit="onSubmit(type, obj)"></user-avatar-form>
+        </div>
+    </md-dialog-content>
+</md-dialog>

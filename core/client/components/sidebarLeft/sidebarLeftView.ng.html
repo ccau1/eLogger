@@ -1,0 +1,17 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" flex>
+    <md-toolbar class="md-theme-indigo" layout="row">
+            <div class="md-toolbar-tools">
+                <h1>Menu</h1>
+                <span flex></span>
+                <md-button aria-label="Logout" ng-hide="$mdMedia('gt-md')" ng-click="logout()">
+                    Logout
+                    <md-icon md-svg-src="img/icons/ic_exit_to_app_white_24px.svg"></md-icon>
+                </md-button>
+            </div>
+    </md-toolbar>
+    <md-content layout-padding flex>
+        <md-content>
+            <menu ng-model="menuSections" show-divider="true"></menu>
+        </md-content>
+    </md-content>
+</md-sidenav>

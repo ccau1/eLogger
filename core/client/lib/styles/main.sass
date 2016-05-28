@@ -1,0 +1,50 @@
+@import {wolves:bourbon}/bourbon
+
+html
+  overflow: hidden
+
+button.half-hanging
+  margin-top: 60px !important
+
+md-badge
+  margin: 0 0 0 8px
+  background-color: #717171
+  color: white
+  padding: 3px 12px
+  border-radius: 4px
+  font-size: 9pt
+  white-space: nowrap
+  margin: 2px 0
+  display: inline-block
+
+md-toast.md-success-toast-theme .md-toast-content
+  background-color: green
+
+
+md-toast.md-error-toast-theme .md-toast-content
+  background-color: maroon
+
+md-list-item.leftBorder
+  border-left: 3px solid #F37E7E
+
+
+
+.avatar-frame
+  /*border: 2px solid #CA1010;*/
+  -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999 /*, 0 2px 5px 4px rgba(0,0,0,.2);*/
+  -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999 /*, 0 2px 5px 4px rgba(0,0,0,.2);*/
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999 /*, 0 2px 5px 4px rgba(0,0,0,.2);*/
+  margin: 2px
+
+.avatar-frame, user-avatar
+  overflow: hidden
+  outline: none
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover
+
+  /* center the image vertically and horizontally */
+  background-position: center
+
+  -webkit-border-radius: 50% /* Saf3+, Chrome */
+  border-radius: 50% /* Opera 10.5, IE 9 */
+  -moz-border-radius: 50%  /* Disabled for FF1+ */

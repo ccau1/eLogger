@@ -1,0 +1,21 @@
+.content {
+    -webkit-transition: -webkit-transform 1s;
+    -webkit-perspective: 600px;
+}
+.content .animate-view-flip {
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all 1s ease-in-out;
+}
+.content .animate-view-flip.ng-enter {
+    -webkit-transform: rotateY(-180deg);
+}
+.content .animate-view-flip.ng-enter-active {
+    -webkit-transform: rotateY(0deg);
+}
+.content .animate-view-flip.ng-leave {
+    -webkit-transform: rotateY(0deg);
+}
+.content .animate-view-flip.ng-leave-active {
+    -webkit-transform: rotateY(180deg);
+}

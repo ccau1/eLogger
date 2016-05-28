@@ -1,0 +1,16 @@
+<form name="adminCompanyForm" layout="column">
+    <div>
+        <label> Company ID </label>
+        <br />
+        <p ng-bind="company._id"></p>
+    </div>
+    <md-input-container>
+        <label> Name </label>
+        <input type="text" ng-model="company.name" aria-label="name" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> Address </label>
+        <!--<address-select ng-model="company.addr"></address-select>-->
+    </md-input-container>
+    <md-button class="md-raised md-primary" ng-disabled="adminCompanyForm.$pristine" ng-click="update()">Update</md-button>
+</form>

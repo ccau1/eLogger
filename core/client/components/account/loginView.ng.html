@@ -1,0 +1,23 @@
+
+<md-toolbar ng-show="error" class="md-warn animate-show-flip-slide" layout="row" layout-fill layout-padding layout-margin>
+    <p class="md-body-1">{{ error }}</p>
+</md-toolbar>
+<div style="margin-top: 100px;"></div>
+<form name="loginForm" ng-submit="$event.preventDefault()" layout="column" layout-fill layout-padding layout-margin>
+    <md-input-container class="boxed">
+        <label> Email </label>
+        <input type="text" ng-model="credentials.email" aria-label="email" required/>
+    </md-input-container>
+    <md-input-container class="boxed">
+        <label> Password </label>
+        <input type="password" ng-model="credentials.password" aria-label="password" required/>
+    </md-input-container>
+
+    <div layout="row">
+        <a class="md-button" ui-sref="register">Register</a>
+        <span flex></span>
+        <md-button type="submit" class="md-raised md-primary" ng-click="login()" aria-label="login"
+                   ng-disabled="loginForm.$invalid">Sign In
+        </md-button>
+    </div>
+</form>

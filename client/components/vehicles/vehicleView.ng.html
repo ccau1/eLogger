@@ -1,0 +1,41 @@
+<form name="vehicleForm" layout="column">
+    <div>
+        <label> Vehicle ID </label>
+        <br />
+        <p ng-bind="vehicle._id"></p>
+    </div>
+    <md-input-container>
+        <label> VIN </label>
+        <input type="text" ng-model="vehicle.vin" aria-label="VIN" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> Year </label>
+        <input type="number" min="4" max="4" ng-model="vehicle.year" aria-label="Year" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> Manufacturer </label>
+        <input type="text" ng-model="vehicle.manufacturer" aria-label="Manufacturer" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> Model </label>
+        <input type="text" ng-model="vehicle.model" aria-label="Model" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> License Plate </label>
+        <input type="text" ng-model="vehicle.licensePlate" aria-label="License Plate" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> License Plate Number </label>
+        <input type="text" ng-model="vehicle.licensePlateNumber" aria-label="License Plate Number" required/>
+    </md-input-container>
+    <md-input-container>
+        <label> License Plate Number </label>
+        <input type="text" ng-model="vehicle.licensePlateNumber" aria-label="License Plate Number" required/>
+    </md-input-container>
+
+    <md-input-container>
+        <label> Address </label>
+        <!--<address-select ng-model="company.addr"></address-select>-->
+    </md-input-container>
+    <md-button class="md-raised md-primary" ng-disabled="vehicleForm.$pristine" ng-click="update()">Update</md-button>
+</form>

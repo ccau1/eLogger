@@ -1,0 +1,3 @@
+﻿<md-select ng-model="settings.theme" aria-label="Select Theme">
+    <md-option ng-repeat="theme in themes" ng-value="theme.val" ng-click="selectTheme($event, theme.val)">{{theme.name}}</md-option>
+</md-select>

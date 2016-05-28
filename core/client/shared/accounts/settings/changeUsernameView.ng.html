@@ -1,0 +1,5 @@
+﻿<md-input-container class="md-block" flex-gt-sm>
+    <label>Username</label>
+    <input ng-model="cp.username">
+</md-input-container>
+<md-button ng-click="setUsername(cp.username)" ng-hide="!cp.username || cp.username == originalUsername" class="md-raised md-primary animate-hide">Set Username</md-button>

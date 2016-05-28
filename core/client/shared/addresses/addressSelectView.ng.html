@@ -1,0 +1,23 @@
+﻿<md-autocomplete ng-disabled="isDisabled"
+                    md-no-cache="noCache"
+                    md-selected-item="ngModel"
+                    md-search-text-change="searchTextChange(searchText)"
+                    md-search-text="searchText"
+                    md-selected-item-change="selectedItemChange(item)"
+                    md-items="item in querySearch(searchText)"
+                    md-item-text="item.text"
+                    md-min-length="0"
+                    md-menu-class="autocomplete-custom-template"
+                    md-floating-label="Enter Address*"
+                    ng-model-options="{ debounce: { 'default': 500, blur: 0 }}">
+    <md-item-template>
+        <span class="item-title">
+            <md-icon md-font-icon="icon-user"></md-icon>
+            <span> {{item.text}} </span>
+        </span>
+    </md-item-template>
+    <md-not-found>
+        No customer matching "{{searchText}}" were found.
+        <a ng-click="add($event, searchText)">Create a new one!</a>
+    </md-not-found>
+</md-autocomplete>

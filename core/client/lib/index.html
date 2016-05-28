@@ -1,0 +1,17 @@
+<head>
+    <title>Template Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700">
+
+</head>
+
+<body ng-app="eLogger">
+<div class="container" layout-fill ng-controller="AppController">
+    <div data-ng-include="'core/client/components/layoutWrappers/accountLayoutView.ng.html'" data-ng-controller="AccountLayoutController" class="animate-view-fade" layout-fill ng-if="$state.current.views.account"></div>
+    <div data-ng-include="'core/client/components/layoutWrappers/mainLayoutView.ng.html'" data-ng-controller="MainLayoutController" class="animate-view-fade" layout-fill ng-if="$state.current.views.main"></div>
+</div>
+</body>

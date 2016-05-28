@@ -1,0 +1,6 @@
+﻿<md-input-container style="margin-right: 10px;">
+    <label>Gender</label>
+    <md-select ng-model="user.profile.gender" ng-model-options="modelOptions">
+        <md-option ng-repeat="gender in genders" value="{{gender}}">{{gender}}</md-option>
+    </md-select>
+</md-input-container>

@@ -1,0 +1,16 @@
+.star-rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.rating md-icon {
+    cursor: pointer;
+    outline: none;
+}
+.filled {
+    color: #fd0;
+}
+
+.readonly .star.filled {
+    color: #666;
+}

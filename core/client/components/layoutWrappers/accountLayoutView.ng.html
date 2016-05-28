@@ -1,0 +1,10 @@
+<div layout="column" layout-align="center center" layout-fill class="accountLayout">
+    <div style="width: 400px; background: #F9F9F9;">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools">
+                <span ng-bind="$state.current.data.pageTitle"></span> <small ng-bind="$state.current.data.pageSubtitle"></small>
+            </h2>
+        </md-toolbar>
+        <div ui-view="account" layout-fill></div>
+    </div>
+</div>

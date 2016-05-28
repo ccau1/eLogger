@@ -1,0 +1,7 @@
+<div layout="row" layout-fill>
+    <div data-ng-include="'core/client/components/sidebarLeft/sidebarLeftView.ng.html'" data-ng-controller="SidebarLeftController" layout="column"></div>
+    <div layout-fill layout="column">
+        <!--<div data-ng-include="'client/components/core/toolbar/toolbarView.ng.html'" data-ng-controller="ToolbarController" include-replace></div>-->
+        <div layout="column" flex ui-view="main" class="animate-view-slide"></div>
+    </div>
+</div>

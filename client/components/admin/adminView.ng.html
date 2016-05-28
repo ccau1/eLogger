@@ -1,0 +1,22 @@
+<div flex layout-fill layout="column">
+    <md-toolbar class="md-whiteframe-glow-z1">
+        <div class="md-toolbar-tools">
+            <md-button ng-if="!showBackBtn" class="md-icon-button" ng-hide="$mdMedia('gt-md')" ng-click="toggleMainMenu()" aria-label="Toggle Menu"><md-icon md-svg-src="img/icons/ic_dehaze_white_24px.svg"></md-icon></md-button>
+            <md-button ng-if="showBackBtn" class="md-icon-button" ng-click="toggleMainMenu()" aria-label="Toggle Menu"><md-icon md-svg-src="img/icons/ic_dehaze_white_24px.svg"></md-icon></md-button>
+            <h2>
+                <span data-ng-bind="state.current.data.pageTitle"></span> <small data-ng-bind="state.current.data.pageSubTitle"></small>
+            </h2>
+            <span flex></span>
+
+        </div>
+    </md-toolbar>
+
+    <div layout="row" flex>
+        <div flex="100" flex-gt-sm="30" ng-show="showRegion('menu')" style="box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);">
+            <menu ng-model="menuSections" show-divider="true"></menu>
+        </div>
+        <div flex="100" flex-gt-sm="70" ng-show="showRegion('content')" layout-padding>
+            <div ui-view="admin"></div>
+        </div>
+    </div>
+</div>

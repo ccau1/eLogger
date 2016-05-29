@@ -1,6 +1,12 @@
 var seedStack = initFn();
+
+if (Meteor.users.find().count() == 0) {
+    seedStack = seedStack.then(seedUsers);
+}
+
 if (Companies.find().count() == 0) {
     seedStack = seedStack.then(seedCompanies);
+    seedStack = seedStack.then(seedUserCompanies);
 }
 
 if (Vehicles.find().count() == 0) {
@@ -12,6 +18,72 @@ function initFn() {
         setTimeout(function() {
             resolve();
         }, 10);
+    });
+}
+
+
+function seedUsers() {
+    return new Promise(function(resolve, reject){
+        var sList = [
+            {
+                username: 'admin 1',
+                email: 'admin1@demo.com',
+                password: '4r3e2w!Q',
+                profile: {
+                    company: ''
+                },
+                roles: [
+                    Constants.Role.ADMIN
+                ]
+            },
+            {
+                username: 'driver 1',
+                email: 'driver1@demo.com',
+                password: '4r3e2w!Q',
+                profile: {
+                    company: ''
+                },
+                roles: [
+                    Constants.Role.DRIVER
+                ]
+            }
+        ]
+
+        lodash.each(sList, function(v, i) {
+            var roles = v.roles;
+            delete v.roles;
+            v.confirmPassword = v.password;
+            Meteor.call('addUser', v, roles, function(err) {
+                if (!err) {
+
+                } else {
+                    console.log('ERROR: ' + err.reason);
+                }
+                if (i + 1 == sList.length) resolve();
+            });
+        });
+    });
+}
+
+function seedUserCompanies() {
+    return new Promise(function(resolve, reject) {
+        var sList = [
+            {
+                findQuery: {username: 'driver 1'},
+                setProfile: {company: Companies.findOne({name: 'Company 1'})._id}
+            },
+            {
+                findQuery: {username: 'admin 1'},
+                setProfile: {company: Companies.findOne({name: 'Company 1'})._id}
+            }
+        ];
+
+        lodash.each(sList, function (v, i) {
+            var user = Meteor.users.findOne(v.findQuery);
+            user.profile = lodash.assign(user.profile, v.setProfile);
+            Meteor.users.update({_id: user._id}, {$set: {'profile': user.profile}});
+            if (i + 1 == sList.length) resolve();
+        });
     });
 }
 

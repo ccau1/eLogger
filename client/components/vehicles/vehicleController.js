@@ -1,12 +1,14 @@
-angular.module(Constants.Module).controller('VehiclesController', ['$scope', '$reactive', 'user', function($scope, $reactive, s_user) {
+angular.module(Constants.Module).controller('VehicleController', ['$scope', '$reactive', 'user', '$stateParams', function($scope, $reactive, s_user, $stateParams) {
     $reactive(this).attach($scope);
 
-    $scope.subscribe('currentCompany');
+    $scope.subscribe('vehicleById', function() {
+        return [$stateParams.id];
+    });
 
     s_user.onReady(function() {
         $scope.helpers({
-            company: function() {
-                return Companies.findOne({ _id: s_user.currentUser.profile.company });
+            vehicle: function() {
+                return Vehicles.findOne({ _id: $stateParams.id });
             }
         });
     });

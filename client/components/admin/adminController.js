@@ -2,6 +2,9 @@ angular.module(Constants.Module).controller('AdminController', ['$mdMedia', '$sc
     $scope.settings = {
         curView: ''
     };
+
+    $scope.$state = $state;
+
     $scope.showRegion = function(view) {
         if (view == 'menu') {
             return !$state.current.views.admin || $mdMedia('gt-sm');
@@ -9,8 +12,6 @@ angular.module(Constants.Module).controller('AdminController', ['$mdMedia', '$sc
             return $state.current.views.admin || $mdMedia('gt-sm');
         }
     }
-
-    console.log('$state.current', $state.current.data);
 
     $scope.menuSections = [
         {

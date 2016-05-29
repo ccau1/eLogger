@@ -2,10 +2,12 @@ angular.module(Constants.Module).directive('headToolbar', ['$mdMedia', '$state',
     return {
         restrict: 'E', // E = element, A = attribute, C = class, M = comment
         scope: { // @ = local scope (string), = = bi-directional binding, & = parent execution binding (function)
-            'mdScrollShrink': '=?'
+            'mdScrollShrink': '=?',
+            'backView': '=?',
+            'title': '=?'
         },
         transclude: true,
-        replace: true,
+        //replace: true,
         templateUrl: 'core/client/shared/toolbars/headToolbarView.ng.html',
         controller: function ($scope) {
 
@@ -21,6 +23,10 @@ angular.module(Constants.Module).directive('headToolbar', ['$mdMedia', '$state',
 
                     $scope.toggleMainMenu = function() {
                         $mdSidenav('left').toggle();
+                    }
+
+                    $scope.goBack = function() {
+                        $state.go($scope.backView.go, $scope.backView.params);
                     }
                 }
             }

@@ -1,4 +1,4 @@
-angular.module(Constants.Module).controller('VehiclesController', ['$scope', '$reactive', 'user', function($scope, $reactive, s_user) {
+angular.module(Constants.Module).controller('VehiclesController', ['$scope', '$reactive', 'user', '$state', function($scope, $reactive, s_user, $state) {
     $reactive(this).attach($scope);
 
     $scope.subscribe('vehicles');
@@ -10,4 +10,8 @@ angular.module(Constants.Module).controller('VehiclesController', ['$scope', '$r
             }
         });
     });
+
+    $scope.selectVehicle = function(vehicle) {
+        $state.go('admin.vehicle', { id: vehicle._id });
+    }
 }]);

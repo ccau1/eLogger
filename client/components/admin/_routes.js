@@ -34,7 +34,7 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                     controller: "CompanyController"
                 }
             },
-            data: {subTitle: 'Company'},
+            data: {subTitle: 'Company', backView: { go: 'admin', params: {} } },
             resolve: lodash.assign(baseResolve, {})
         })
         .state('admin.vehicles', {
@@ -59,7 +59,14 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                 }
             },
             data: {subTitle: 'Vehicles', backView: { go: 'admin.vehicles', params: {} }},
-            resolve: lodash.assign(baseResolve, {})
+            resolve: lodash.assign(baseResolve, {
+                subTitle: ['$stateParams', function($stateParams) {
+                    if ($stateParams.id) {
+                        this.data.subTitle = 'Vehicle (' + $stateParams.id + ')';
+                    }
+                    return this.data.subTitle;
+                }]
+            })
         })
 
 

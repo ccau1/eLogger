@@ -1,8 +1,9 @@
 <md-toolbar class="md-whiteframe-glow-z1">
     <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" ng-hide="$mdMedia('gt-md')" ng-click="toggleMainMenu()" aria-label="Toggle Menu"><md-icon md-svg-src="img/icons/ic_dehaze_white_24px.svg"></md-icon></md-button>
+        <md-button ng-if="!backView" class="md-icon-button" ng-hide="$mdMedia('gt-md')" ng-click="toggleMainMenu()" aria-label="Toggle Menu"><md-icon md-svg-src="img/icons/ic_dehaze_white_24px.svg"></md-icon></md-button>
+        <md-button ng-if="backView" class="md-icon-button" ng-click="goBack()" aria-label="Navigate Back"><md-icon md-svg-src="img/icons/ic_arrow_back_white_24px.svg"></md-icon></md-button>
         <h2>
-            <span data-ng-bind="state.current.data.pageTitle"></span> <small data-ng-bind="state.current.data.pageSubTitle"></small>
+            <span data-ng-bind="title ? title : state.current.data.pageTitle"></span> <small ng-if="state.current.data.subTitle"> - </small><small data-ng-bind="state.current.data.subTitle"></small>
         </h2>
         <span flex></span>
         <div ng-transclude></div>

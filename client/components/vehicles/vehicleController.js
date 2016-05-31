@@ -5,12 +5,10 @@ angular.module(Constants.Module).controller('VehicleController', ['$scope', '$re
         return [$stateParams.id];
     });
 
-    s_user.onReady(function() {
-        $scope.helpers({
-            vehicle: function() {
-                return Vehicles.findOne({ _id: $stateParams.id });
-            }
-        });
+    $scope.helpers({
+        vehicle: function() {
+            return Vehicles.findOne({ _id: $stateParams.id });
+        }
     });
 
     $scope.update = function() {
@@ -20,4 +18,27 @@ angular.module(Constants.Module).controller('VehicleController', ['$scope', '$re
             }
         });
     }
+
+    $scope.submitForm = function() {
+        Meteor.call('addVehicle', $scope.vehicle, function(err) {
+            if (!err) {
+                utils.toast('Vehicle Added', utils.TOAST_TYPE.SUCCESS);
+            } else {
+                utils.toast('Vehicle Add Error: ' + err.reason, utils.TOAST_TYPE.FAIL);
+            }
+        });
+    };
+
+    $scope.$watch('vehicle', function(newVal, oldVal) {
+        if (oldVal != undefined && newVal._id && oldVal._id && newVal != oldVal) {
+            // update doc
+            Meteor.call('updateVehicle', $scope.vehicle, function(err) {
+                if (!err) {
+                    utils.toast('Vehicle Updated', utils.TOAST_TYPE.SUCCESS);
+                } else {
+                    utils.toast('Vehicle Update Error: ' + err.reason, utils.TOAST_TYPE.FAIL);
+                }
+            });
+        }
+    }, true);
 }]);

@@ -24,7 +24,7 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                     controller: "AccountController"
                 }
             },
-            data: {pageTitle: 'Overview'},
+            data: {pageTitle: 'Account'},
             resolve: lodash.assign(baseResolve, {
 
             })
@@ -42,54 +42,41 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
 
             })
         })
-        .state('projectCreate', {
-            url: "/projects/create",
+        .state('documents', {
+            url: "/documents",
             views: {
                 'main': {
-                    templateUrl: "client/components/projects/projectCreateView.ng.html",
-                    controller: "ProjectCreateController"
+                    templateUrl: "client/components/documents/documentsView.ng.html",
+                    controller: "DocumentsController"
                 }
             },
-            data: {pageTitle: 'Create a Project'},
+            data: {pageTitle: 'Documents'},
             resolve: lodash.assign(baseResolve, {
 
             })
         })
-        .state('projectSearch', {
-            url: "/projects/search",
+        .state('newDocument', {
+            url: "/documents/new",
             views: {
                 'main': {
-                    templateUrl: "client/components/projects/projectSearchView.ng.html",
-                    controller: "ProjectSearchController"
+                    templateUrl: "client/components/documents/documentView.ng.html",
+                    controller: "DocumentController"
                 }
             },
-            data: {pageTitle: 'Search Available Projects'},
+            data: {pageTitle: 'Document', backView: { go: 'documents', params: {} }},
             resolve: lodash.assign(baseResolve, {
 
             })
         })
-        .state('projects', {
-            url: "/projects",
+        .state('document', {
+            url: "/documents/:id",
             views: {
                 'main': {
-                    templateUrl: "client/components/projects/projectsView.ng.html",
-                    controller: "ProjectsController"
+                    templateUrl: "client/components/documents/documentView.ng.html",
+                    controller: "DocumentController"
                 }
             },
-            data: {pageTitle: 'My Projects'},
-            resolve: lodash.assign(baseResolve, {
-
-            })
-        })
-        .state('projectDetail', {
-            url: "/projects/:id",
-            views: {
-                'main': {
-                    templateUrl: "client/components/projects/projectDetailView.ng.html",
-                    controller: "ProjectDetailController"
-                }
-            },
-            data: {pageTitle: 'My Projects'},
+            data: {pageTitle: 'Document', backView: { go: 'documents', params: {} }},
             resolve: lodash.assign(baseResolve, {
 
             })

@@ -37,5 +37,6 @@
         <label> Address </label>
         <!--<address-select ng-model="company.addr"></address-select>-->
     </md-input-container>
-    <md-button class="md-raised md-primary" ng-disabled="vehicleForm.$pristine" ng-click="update()">Update</md-button>
+
+    <md-button ng-if="!vehicle._id" class="md-raised md-primary" ng-disabled="vehicleForm.$pristine || vehicleForm.$invalid" ng-click="submitForm()">Add</md-button>
 </form>

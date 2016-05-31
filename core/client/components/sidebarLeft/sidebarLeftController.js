@@ -16,27 +16,11 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     }
                 },
                 {
-                    title: 'Create',
+                    title: 'Documents',
                     subtitle: '',
-                    desc: 'Plan your own project now!',
+                    desc: '',
                     onClick: function() {
-                        $state.go('projectCreate');
-                    }
-                },
-                {
-                    title: 'Browse',
-                    subtitle: '',
-                    desc: 'Search for available projects',
-                    onClick: function() {
-                        $state.go('projectSearch');
-                    }
-                },
-                {
-                    title: 'My Projects',
-                    subtitle: '',
-                    desc: 'Currently developing projects',
-                    onClick: function() {
-                        $state.go('projects');
+                        $state.go('documents');
                     }
                 },
                 {

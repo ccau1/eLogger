@@ -3,7 +3,7 @@ angular.module(Constants.Module).directive('headToolbar', ['$mdMedia', '$state',
         restrict: 'E', // E = element, A = attribute, C = class, M = comment
         scope: { // @ = local scope (string), = = bi-directional binding, & = parent execution binding (function)
             'mdScrollShrink': '=?',
-            'backView': '=?',
+            //'backView': '=?',
             'title': '=?'
         },
         transclude: true,
@@ -15,7 +15,7 @@ angular.module(Constants.Module).directive('headToolbar', ['$mdMedia', '$state',
         compile: function(element, attrs) {
             return {
                 pre: function($scope, elem, attrs) {
-                    $scope.state = $state;
+                    $scope.$state = $state;
                     $scope.$mdMedia = $mdMedia;
                     if ($scope.mdScrollShrink) {
                         elem.prop('md-scroll-shrink', true);
@@ -26,7 +26,7 @@ angular.module(Constants.Module).directive('headToolbar', ['$mdMedia', '$state',
                     }
 
                     $scope.goBack = function() {
-                        $state.go($scope.backView.go, $scope.backView.params);
+                        $state.go($state.current.data.backView.go, $state.current.data.backView.params);
                     }
                 }
             }

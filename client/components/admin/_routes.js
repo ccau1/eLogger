@@ -49,6 +49,18 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
             data: {subTitle: 'Vehicles', backView: { go: 'admin', params: {} } },
             resolve: lodash.assign(baseResolve, {})
         })
+        .state('admin.newVehicle', {
+            url: "/vehicles/new",
+            views: {
+                'main': {},
+                'admin': {
+                    templateUrl: "client/components/vehicles/vehicleView.ng.html",
+                    controller: "VehicleController"
+                }
+            },
+            data: {subTitle: 'New Vehicle', backView: { go: 'admin.vehicles', params: {} }},
+            resolve: lodash.assign(baseResolve, {})
+        })
         .state('admin.vehicle', {
             url: "/vehicles/:id",
             views: {

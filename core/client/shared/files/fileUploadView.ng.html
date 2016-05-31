@@ -1,0 +1,13 @@
+﻿<md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>
+<div ngf-drop ngf-select
+     ngf-change="addImages($event, $files)" ngf-capture="'camera'"
+     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+     ngf-multiple="multiple" ngf-allow-dir="false" ngf-accept="accept" ngf-pattern="accept" accept="accept"
+     ngf-drop-available="true" ngf-validate="validate" ng-if="mode == 'box' || !mode" ng-disabled="ngDisabled">
+    <div>Drop or Select File Here</div>
+</div>
+
+<md-button ngf-select="addImages($event, $files)" ngf-capture="'camera'" ng-model="ngModel.imgs" ngf-validate="validate" ngf-multiple="multiple"
+        ngf-allow-dir="false" accept="accept" ngf-pattern="accept" ngf-accept="accept" multiple ng-if="mode == 'button'" ng-disabled="ngDisabled">
+    Select Picture
+</md-button>

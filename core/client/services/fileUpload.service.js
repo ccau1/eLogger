@@ -11,7 +11,7 @@ angular.module(Constants.Module).factory('fileUpload', [function() {
                     setTimeout(function() {
                         console.log('uploadedFile', uploadedFile, uploadedFile.url());
                         fileObj.uploadId = uploadedFile._id;
-                        fileObj.urls.original = uploadedFile.url();
+                        fileObj.urls.original = uploadedFile.url({ brokenIsFine: true });
                         fileObj.urls.thumbnail = '';//uploadedFile.url({brokenIsFine: false, store: 'thumbnail'});
                         dfd.resolve(fileObj);
                     }, 1000);

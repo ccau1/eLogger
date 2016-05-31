@@ -11,6 +11,10 @@ angular.module(Constants.Module).controller('VehiclesController', ['$scope', '$r
         });
     });
 
+    $scope.add = function() {
+        $state.go('admin.newVehicle');
+    }
+
     $scope.selectVehicle = function(vehicle) {
         $state.go('admin.vehicle', { id: vehicle._id });
     }

@@ -1,6 +1,6 @@
-Documents = new Mongo.Collection('documents');
+EldTypes = new Mongo.Collection('eldTypes');
 
-Documents.allow({
+EldTypes.allow({
     insert: function(userId, doc) {
         // true if userId exists
         return !!userId;
@@ -10,7 +10,7 @@ Documents.allow({
     }
 });
 
-Schemas.Document = new SimpleSchema({
+Schemas.EldTypes = new SimpleSchema({
     _id: {
         type: String,
         label: 'Id'
@@ -34,41 +34,30 @@ Schemas.Document = new SimpleSchema({
             }
         },
     },
-    owner: {
+    type: {
         type: String,
-        label: 'Owner',
-        autoValue: function() {
-            if (!this.value) return Meteor.userId();
-        },
+        label: 'Type'
     },
-    title: {
-        type: String,
-        label: 'Title'
-    },
-    desc: {
-        type: String,
-        label: 'Description'
-    },
-    file: {
-        type: Schemas.File,
-        label: 'File'
+    data: {
+        type: Object,
+        label: 'Credential'
     }
 });
 
-Documents.attachSchema(Schemas.Document);
+EldTypes.attachSchema(Schemas.EldType);
 
 
 
 Meteor.methods({
-    addDocument: function(obj, callback) {
-        Documents.insert(obj, callback);
+    addEldType: function(obj, callback) {
+        EldTypes.insert(obj, callback);
     },
-    updateDocument: function(obj, callback) {
+    updateEldType: function(obj, callback) {
         var id = obj._id;
         delete obj._id;
-        Documents.update({_id: id}, {$set: obj}, callback);
+        EldTypes.update({_id: id}, {$set: obj}, callback);
     },
-    deleteDocument: function(id) {
-        Documents.remove(id);
+    deleteEldType: function(id) {
+        EldTypes.remove(id);
     }
 })

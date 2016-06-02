@@ -1,42 +1,62 @@
-<form name="vehicleForm" layout="column">
-    <div>
+<form name="vehicleForm" layout="column" ng-submit="submitForm(vehicleForm)">
+    <div ng-if="vehicle._id">
         <label> Vehicle ID </label>
         <br />
         <p ng-bind="vehicle._id"></p>
     </div>
     <md-input-container>
         <label> VIN </label>
-        <input type="text" ng-model="vehicle.vin" aria-label="VIN" required/>
+        <input type="text" ng-model="vehicle.vin" name="vin" aria-label="VIN" required capitalize />
+        <error-messages ng-model="vehicleForm.vin"></error-messages>
     </md-input-container>
     <md-input-container>
         <label> Year </label>
-        <input ng-model="vehicle.year" aria-label="Year" required/>
+        <input ng-model="vehicle.year" name="year" aria-label="Year" required number-only maxlength="4" />
+        <error-messages ng-model="vehicleForm.year"></error-messages>
     </md-input-container>
     <md-input-container>
         <label> Manufacturer </label>
-        <input type="text" ng-model="vehicle.manufacturer" aria-label="Manufacturer" required/>
+        <input type="text" ng-model="vehicle.manufacturer" name="manufacturer" aria-label="Manufacturer" required />
+        <error-messages ng-model="vehicleForm.manufacturer"></error-messages>
     </md-input-container>
     <md-input-container>
         <label> Model </label>
-        <input type="text" ng-model="vehicle.model" aria-label="Model" required/>
+        <input type="text" ng-model="vehicle.model" name="model" aria-label="Model" required />
+        <error-messages ng-model="vehicleForm.model"></error-messages>
     </md-input-container>
     <md-input-container>
         <label> License Plate </label>
-        <input type="text" ng-model="vehicle.licensePlate" aria-label="License Plate" required/>
+        <input type="text" ng-model="vehicle.licensePlate" name="licensePlate" aria-label="License Plate" required capitalize />
+        <error-messages ng-model="vehicleForm.licensePlate"></error-messages>
     </md-input-container>
     <md-input-container>
         <label> License Plate Number </label>
-        <input type="text" ng-model="vehicle.licensePlateNumber" aria-label="License Plate Number" required/>
+        <input type="text" ng-model="vehicle.licensePlateNumber" name="licensePlateNumber" aria-label="License Plate Number" required maxlength="7" capitalize />
+        <error-messages ng-model="vehicleForm.licensePlateNumber"></error-messages>
     </md-input-container>
     <md-input-container>
-        <label> License Plate Number </label>
-        <input type="text" ng-model="vehicle.licensePlateNumber" aria-label="License Plate Number" required/>
+        <p> Metric Unit </p>
+        <md-radio-group required ng-model="vehicle.isMetric" name="isMetric">
+            <md-radio-button ng-value="true">Metric</md-radio-button>
+            <md-radio-button ng-value="false">Imperial</md-radio-button>
+        </md-radio-group>
+        <error-messages ng-model="vehicleForm.isMetric"></error-messages>
     </md-input-container>
 
     <md-input-container>
-        <label> Address </label>
-        <!--<address-select ng-model="company.addr"></address-select>-->
+        <p> Metric Unit </p>
+        <md-select ng-model="vehicle.eld.type" name="eld.type" aria-label="ELD">
+            <md-option ng-value=""> -- Select ELD -- </md-option>
+            <md-option ng-repeat="eldAdaptor in eldAdaptors" ng-value="eldAdaptor.val">{{eldAdaptor.name}}</md-option>
+        </md-select>
     </md-input-container>
 
-    <md-button ng-if="!vehicle._id" class="md-raised md-primary" ng-disabled="vehicleForm.$pristine || vehicleForm.$invalid" ng-click="submitForm()">Add</md-button>
+    <md-input-container ng-if="vehicle.eld.type">
+        <label> ELD Device ID </label>
+        <input type="text" ng-model="vehicle.eld.deviceId" name="eld.deviceId" aria-label="ELD Device ID" required />
+        <error-messages ng-model="vehicleForm.eld.deviceId"></error-messages>
+    </md-input-container>
+
+
+    <md-button type="submit" ng-if="!vehicle._id" class="md-raised md-primary" ng-click="vehicleForm.$setSubmitted(true)">Add</md-button>
 </form>

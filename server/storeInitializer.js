@@ -30,7 +30,7 @@ function seedUsers() {
                 email: 'admin1@demo.com',
                 password: '4r3e2w!Q',
                 profile: {
-                    company: ''
+                    companyId: ''
                 },
                 roles: [
                     Constants.Role.ADMIN
@@ -41,7 +41,7 @@ function seedUsers() {
                 email: 'driver1@demo.com',
                 password: '4r3e2w!Q',
                 profile: {
-                    company: ''
+                    companyId: ''
                 },
                 roles: [
                     Constants.Role.DRIVER
@@ -70,11 +70,11 @@ function seedUserCompanies() {
         var sList = [
             {
                 findQuery: {username: 'driver 1'},
-                setProfile: {company: Companies.findOne({name: 'Company 1'})._id}
+                setProfile: {companyId: Companies.findOne({name: 'Company 1'})._id}
             },
             {
                 findQuery: {username: 'admin 1'},
-                setProfile: {company: Companies.findOne({name: 'Company 1'})._id}
+                setProfile: {companyId: Companies.findOne({name: 'Company 1'})._id}
             }
         ];
 

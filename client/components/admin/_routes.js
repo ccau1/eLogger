@@ -80,6 +80,37 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                 }]
             })
         })
+        .state('admin.eldTypes', {
+            url: "/ELD-plugins",
+            views: {
+                'main': {},
+                'admin': {
+                    templateUrl: "client/components/eldTypes/eldTypesView.ng.html",
+                    controller: "EldTypesController"
+                }
+            },
+            data: {subTitle: 'ELD Plugins', backView: { go: 'admin', params: {} } },
+            resolve: lodash.assign(baseResolve, {})
+        })
+        .state('admin.eldType', {
+            url: "/ELD-plugins/:type",
+            views: {
+                'main': {},
+                'admin': {
+                    templateUrl: "client/components/eldTypes/eldTypeView.ng.html",
+                    controller: "EldController"
+                }
+            },
+            data: {subTitle: 'ELD Plugin', backView: { go: 'admin.eldTypes', params: {} }},
+            resolve: lodash.assign(baseResolve, {
+                subTitle: ['$stateParams', function($stateParams) {
+                    if ($stateParams.id) {
+                        this.data.subTitle = 'ELD (' + $stateParams.type.replace('-', ' ') + ')';
+                    }
+                    return this.data.subTitle;
+                }]
+            })
+        })
 
 
 

@@ -12,7 +12,7 @@ angular.module(Constants.Module).directive('addressSelect', ['$compile', 'settin
 		templateUrl: 'core/client/shared/addresses/addressSelectView.ng.html',
 		controller: function ($scope) {
 
-		},
+	},
 		link: function ($scope, element, attrs, ctrl) {
 
 			var formatter = function(val) {

@@ -1,0 +1,4 @@
+<div ng-if="field.$$parentForm.$submitted || field.$dirty || field.$touched" ng-messages="field.$error" role="alert">
+    <div ng-messages-include="error-messages"></div>
+    <div ng-transclude></div>
+</div>

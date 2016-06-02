@@ -10,6 +10,18 @@ Vehicles.allow({
     }
 });
 
+Schemas.ELD = new SimpleSchema({
+    type: {
+        type: String,
+        label: 'Type'
+    },
+    deviceId: {
+        type: String,
+        label: 'Device ID'
+    }
+});
+
+
 Schemas.Vehicle = new SimpleSchema({
     _id: {
         type: String,
@@ -17,7 +29,22 @@ Schemas.Vehicle = new SimpleSchema({
     },
     companyId: {
         type: String,
-        label: 'Company ID'
+        label: 'Company ID',
+        autoValue: function() {
+            // TODO:: for some reason _id throws error...but inserts company id properly
+
+            if (!this.value && Meteor.isServer) {
+                var usr = Meteor.user();
+                return Companies.findOne({ _id: usr.profile.companyId })._id;
+            }
+        },
+    },
+    owner: {
+        type: String,
+        label: 'Owner',
+        autoValue: function() {
+            if (!this.value) return Meteor.userId();
+        },
     },
     createdAt: {
         type: Date,
@@ -25,10 +52,6 @@ Schemas.Vehicle = new SimpleSchema({
             if (!this.value) return new Date();
         },
         label: 'Created At'
-    },
-    owner: {
-        type: String,
-        label: 'Owner'
     },
     vin: {
         type: String,
@@ -57,8 +80,11 @@ Schemas.Vehicle = new SimpleSchema({
     isMetric: {
         type: Boolean,
         label: 'Is Metric'
+    },
+    eld: {
+        type: Schemas.ELD,
+        label: 'ELD'
     }
-
 });
 
 Vehicles.attachSchema(Schemas.Vehicle);
@@ -67,7 +93,7 @@ Vehicles.attachSchema(Schemas.Vehicle);
 
 Meteor.methods({
     addVehicle: function(obj, callback) {
-        obj.owner = this.userId;
+        var usr = Meteor.users.findOne({ _id: this.userId });
         Vehicles.insert(obj, callback);
     },
     updateVehicle: function(obj, callback) {

@@ -1,4 +1,4 @@
-angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', '$state', function ($scope, $state) {
+angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', '$state', '$mdSidenav', function ($scope, $state, $mdSidenav) {
     $scope.$on('$includeContentLoaded', function () {
         //Layout.initSidebar(); // init sidebar
     });
@@ -13,6 +13,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     desc: 'Management Center',
                     onClick: function() {
                         $state.go('admin');
+                        $mdSidenav('left').close();
                     }
                 },
                 {
@@ -21,6 +22,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     desc: '',
                     onClick: function() {
                         $state.go('documents');
+                        $mdSidenav('left').close();
                     }
                 },
                 {
@@ -29,6 +31,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     desc: '',
                     onClick: function() {
                         $state.go('settings');
+                        $mdSidenav('left').close();
                     }
                 },
 

@@ -2,20 +2,28 @@
 import angularMeteor from 'angular-meteor';
 import '/lib/Constants.js';
 //import angularGoogleMaps from 'angular-google-maps';
+//import NemLogging from 'angular-simple-logger';
 
 mainApp = angular.module(Constants.Module, [
     angularMeteor,
     //"angular-meteor",
+    'ngMessages',
     "ui.router",
     "ngMaterial",
     "ngFileUpload",
     'ngImgCrop',
+    //'nemLogging',
+    //NemLogging,
+    //'uiGmapgoogle-maps',
     //angularGoogleMaps,
-    //"uiGmapgoogle-maps",
 ]);
-//
+
 //mainApp.config(['uiGmapGoogleMapApiProvider', '$mdThemingProvider', function (uiGmapGoogleMapApiProvider, $mdThemingProvider) {
-//
+//    uiGmapGoogleMapApiProvider.configure({
+//        //key: 'my-api-key',
+//        //v: '3.17',
+//        libraries: 'weather,geometry,visualization'
+//    });
 //}]);
 
 /* Setup global settings */

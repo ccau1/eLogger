@@ -5,8 +5,11 @@
         <div flex="100" flex-gt-sm="30" ng-show="showRegion('menu')" style="box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);">
             <menu ng-model="menuSections" show-divider="true"></menu>
         </div>
-        <md-content flex="100" flex-gt-sm="70" ng-show="showRegion('content')" layout-padding>
-            <div ui-view="admin"></div>
+        <md-content flex="100" flex-gt-sm="70" ng-show="showRegion('content')" layout-padding style="overflow-x: hidden;">
+            <!--need div pos:relative to contain 'animate-view-*' absolute from creating overflow-x scroll -->
+            <div style="position: relative;">
+                <div ui-view="admin" class="animate-view-slideleft"></div>
+            </div>
         </md-content>
     </div>
 </div>

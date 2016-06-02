@@ -32,6 +32,14 @@ angular.module(Constants.Module).controller('AdminController', ['$mdMedia', '$sc
                     onClick: function () {
                         $state.go('admin.vehicles');
                     }
+                },
+                {
+                    title: 'ELD Plugins',
+                    subtitle: '',
+                    desc: '',
+                    onClick: function () {
+                        $state.go('admin.eldTypes');
+                    }
                 }
             ]
         }

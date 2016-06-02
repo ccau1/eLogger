@@ -24,7 +24,10 @@ Schemas.Company = new SimpleSchema({
     },
     owner: {
         type: String,
-        label: 'Owner'
+        label: 'Owner',
+        autoValue: function() {
+            if (!this.value) return Meteor.userId();
+        },
     },
     name: {
         type: String,

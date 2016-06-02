@@ -1,0 +1,6 @@
+<form name="vehicleForm" layout="column" ng-submit="submitForm(vehicleForm)">
+    <div class="formFields"></div>
+
+
+    <md-button type="submit" ng-if="!vehicle._id" class="md-raised md-primary" ng-click="vehicleForm.$setSubmitted(true)">Add</md-button>
+</form>

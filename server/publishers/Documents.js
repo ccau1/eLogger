@@ -19,9 +19,9 @@ function filterByRole() {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = {};
     if (Roles.userIsInRole(this.userId, 'admin')) {
-        filter.company = usr.profile.company;
+        filter.company = usr.profile.companyId;
     } else if (Roles.userIsInRole(this.userId, 'driver')) {
-        filter.company = usr.profile.company;
+        filter.company = usr.profile.companyId;
         filter.owner = usr._id;
     }
 

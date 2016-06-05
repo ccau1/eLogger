@@ -2,9 +2,10 @@
 <md-grid-list
         md-cols-xs="3" md-cols-sm="4" md-cols-md="5" md-cols-gt-md="6"
         md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+        md-gutter="12px" md-gutter-gt-sm="8px" style="min-height: 80px;">
     <md-grid-tile ng-repeat="adaptor in getAdaptors(true)" class="green"
                   md-rowspan="1" md-colspan="1" ng-click="select(adaptor)">
+        <img ng-src="{{adaptor.icon}}" style="max-width: 100%;" />
         <md-grid-tile-footer>
             <h3>{{adaptor.name}}</h3>
         </md-grid-tile-footer>
@@ -15,9 +16,10 @@
 <md-grid-list
         md-cols-xs="3" md-cols-sm="4" md-cols-md="5" md-cols-gt-md="6"
         md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+        md-gutter="12px" md-gutter-gt-sm="8px" style="min-height: 80px;">
     <md-grid-tile ng-repeat="adaptor in getAdaptors(false)" class="green"
                   md-rowspan="1" md-colspan="1" ng-click="select(adaptor)">
+        <img ng-src="{{adaptor.icon}}" style="max-width: 100%;" />
         <md-grid-tile-footer>
             <h3>{{adaptor.name}}</h3>
         </md-grid-tile-footer>

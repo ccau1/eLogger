@@ -38,7 +38,7 @@ angular.module(Constants.Module).controller('AdminController', ['$mdMedia', '$sc
                     subtitle: '',
                     desc: '',
                     onClick: function () {
-                        $state.go('admin.eldTypes');
+                        $state.go('admin.eldPlugins');
                     }
                 }
             ]

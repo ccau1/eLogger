@@ -1,6 +1,6 @@
-EldTypes = new Mongo.Collection('eldTypes');
+EldPlugins = new Mongo.Collection('eldPlugins');
 
-EldTypes.allow({
+EldPlugins.allow({
     insert: function(userId, doc) {
         // true if userId exists
         return !!userId;
@@ -10,7 +10,7 @@ EldTypes.allow({
     }
 });
 
-Schemas.EldTypes = new SimpleSchema({
+Schemas.EldPlugin = new SimpleSchema({
     _id: {
         type: String,
         label: 'Id'
@@ -40,24 +40,26 @@ Schemas.EldTypes = new SimpleSchema({
     },
     data: {
         type: Object,
-        label: 'Credential'
+        optional: true,
+        blackbox: true,
+        label: 'Data'
     }
 });
 
-EldTypes.attachSchema(Schemas.EldType);
+EldPlugins.attachSchema(Schemas.EldPlugin);
 
 
 
 Meteor.methods({
-    addEldType: function(obj, callback) {
-        EldTypes.insert(obj, callback);
+    addEldPlugin: function(obj, callback) {
+        EldPlugins.insert(obj, callback);
     },
-    updateEldType: function(obj, callback) {
+    updateEldPlugin: function(obj, callback) {
         var id = obj._id;
         delete obj._id;
-        EldTypes.update({_id: id}, {$set: obj}, callback);
+        EldPlugins.update({_id: id}, {$set: obj}, callback);
     },
-    deleteEldType: function(id) {
-        EldTypes.remove(id);
+    deleteEldPlugin: function(id) {
+        EldPlugins.remove(id);
     }
 })

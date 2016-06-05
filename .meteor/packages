@@ -48,6 +48,7 @@ harrison:papa-parse
 stevezhu:lodash
 fourseven:scss
 wolves:bourbon
-sebhero:angular-material-icons
-percolate:synced-cron
 http
+
+#sebhero:angular-material-icons
+percolate:synced-cron

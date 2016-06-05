@@ -1,21 +1,21 @@
 ﻿<div ng-switch on="file.type" style="height: 100%;">
         <span ng-switch-when="image/jpeg" style="display: block;height: 100%;text-align: center;">
             <a target="_self" href="{{file.urls.original}}" data-lightbox="{{file.name}}" style="display: block; height: 100%;">
-                <img src="{{file.urls.original}}" style="height: 100%;" />
+                <img ng-src="{{file.urls.original}}" style="height: 100%;" />
             </a>
         </span>
         <span ng-switch-when="image/jpg" style="display: block;height: 100%;text-align: center;">
             <a target="_self" href="{{file.urls.original}}" data-lightbox="{{file.name}}" style="display: block; height: 100%;">
-                <img src="{{file.urls.original}}" style="height: 100%;" />
+                <img ng-src="{{file.urls.original}}" style="height: 100%;" />
             </a>
         </span>
         <span ng-switch-when="image/png" style="display: block;height: 100%;text-align: center;">
             <a target="_self" href="{{file.urls.original}}" data-lightbox="{{file.name}}" style="display: block; height: 100%;">
-                <img src="{{file.urls.original}}" style="height: 100%;" />
+                <img ng-src="{{file.urls.original}}" style="height: 100%;" />
             </a>
         </span>
         <pre ng-switch-when="text/plain"><ng-include src="getFileURL()"></ng-include></pre>
-        <span ng-switch-when="application/pdf"><iframe src="{{file.urls.original}}" style="width:100%; min-width: 100px; height: 100%;" frameborder="0"></iframe></span>
+        <span ng-switch-when="application/pdf"><iframe ng-src="{{file.urls.original}}" style="width:100%; min-width: 100px; height: 100%;" frameborder="0"></iframe></span>
         <span ng-switch-default><img src="/img/icon_file.png" /></span>
 </div>
 

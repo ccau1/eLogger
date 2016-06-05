@@ -83,6 +83,7 @@ Schemas.Vehicle = new SimpleSchema({
     },
     eld: {
         type: Schemas.ELD,
+        optional: true,
         label: 'ELD'
     }
 });

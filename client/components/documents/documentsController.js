@@ -20,7 +20,7 @@ angular.module(Constants.Module).controller('DocumentsController', ['$scope', '$
 
     $scope.remove = function(ev, item) {
         Uploads.remove(item.file.uploadId);
-        Meteor.call('removeDocument', item, function(err) {
+        Meteor.call('deleteDocument', item._id, function(err) {
             if (!err) {
                 utils.toast('Document Removed', utils.TOAST_TYPE.SUCCESS);
             } else {

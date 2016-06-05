@@ -80,32 +80,32 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                 }]
             })
         })
-        .state('admin.eldTypes', {
+        .state('admin.eldPlugins', {
             url: "/ELD-plugins",
             views: {
                 'main': {},
                 'admin': {
-                    templateUrl: "client/components/eldTypes/eldTypesView.ng.html",
-                    controller: "EldTypesController"
+                    templateUrl: "client/components/eldPlugins/eldPluginsView.ng.html",
+                    controller: "EldPluginsController"
                 }
             },
             data: {subTitle: 'ELD Plugins', backView: { go: 'admin', params: {} } },
             resolve: lodash.assign(baseResolve, {})
         })
-        .state('admin.eldType', {
+        .state('admin.eldPlugin', {
             url: "/ELD-plugins/:type",
             views: {
                 'main': {},
                 'admin': {
-                    templateUrl: "client/components/eldTypes/eldTypeView.ng.html",
-                    controller: "EldController"
+                    templateUrl: "client/components/eldPlugins/eldPluginView.ng.html",
+                    controller: "EldPluginController"
                 }
             },
-            data: {subTitle: 'ELD Plugin', backView: { go: 'admin.eldTypes', params: {} }},
+            data: {subTitle: 'ELD Plugin', backView: { go: 'admin.eldPlugins', params: {} }},
             resolve: lodash.assign(baseResolve, {
                 subTitle: ['$stateParams', function($stateParams) {
-                    if ($stateParams.id) {
-                        this.data.subTitle = 'ELD (' + $stateParams.type.replace('-', ' ') + ')';
+                    if ($stateParams.type) {
+                        this.data.subTitle = 'ELD (' + ELD_Adaptor[$stateParams.type].name + ')';
                     }
                     return this.data.subTitle;
                 }]

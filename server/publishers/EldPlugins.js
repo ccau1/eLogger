@@ -1,20 +1,20 @@
-Meteor.publish("eldTypes", function () {
+Meteor.publish("eldPlugins", function () {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = { companyId: usr.profile.companyId };
 
-    return EldTypes.find(filter);
+    return EldPlugins.find(filter);
 });
 
-Meteor.publish("eldTypeById", function (id) {
+Meteor.publish("eldPluginById", function (id) {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = { companyId: usr.profile.companyId, _id: id };
 
-    return EldTypes.find(filter);
+    return EldPlugins.find(filter);
 });
 
-Meteor.publish("eldTypeByType", function (type) {
+Meteor.publish("eldPluginByType", function (type) {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = { companyId: usr.profile.companyId, type: type };
 
-    return EldTypes.find(filter);
+    return EldPlugins.find(filter);
 });

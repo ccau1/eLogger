@@ -1,30 +1,42 @@
 ELD_Adaptor.Connected_Telematics = {
     name: 'Connected Telematics',
-    icon: '',
-    dataFields: new SimpleSchema({
-        username: {
-            type: String,
-            label: 'Username'
+    icon: 'http://connectedtelematics.com/wp-content/uploads/2015/12/connect-telematics-logo.png',
+    dataFields: [ // FOLLOW 'ANGULAR FORMLY' STRUCTURE
+        {
+            key: 'username',
+            type: 'input',
+            templateOptions: {
+                label: 'Username',
+                required: true,
+
+            }
         },
-        password: {
-            type: String,
-            //encrypted: true,
-            label: 'Password'
+        {
+            key: 'password',
+            type: 'input',
+            templateOptions: {
+                label: 'Password',
+                required: true,
+            }
         },
-        database: {
-            type: String,
-            label: 'Database'
+        {
+            key: 'database',
+            type: 'input',
+            templateOptions: {
+                label: 'Database',
+                required: true,
+            }
         }
-    }),
+    ],
     token: '',
-    setToken: function(cred) {
+    setToken: function(data) {
         return new Promise(function(resolve, reject) {
             var headers = {};
             headers['Content-Type'] = "application/x-www-form-urlencoded";
 
             Http.call('POST', 'http://a1.geotrack.co/token', {
                 headers: headers,
-                content: '' // TODO:: need to save credential somewhere
+                content: lodash.map(data, function(v,k) { return k + '=' + v; }).join('&')
             }, function (err, result) {
                 if (!err) {
                     resolve(result);

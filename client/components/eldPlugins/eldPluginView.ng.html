@@ -1,5 +1,5 @@
 <form name="eldPluginForm" layout="column" ng-submit="submitForm(eldPluginForm)">
-    <formly-form model="eldPlugin.data" fields="eldAdaptor.dataFields">
+    <formly-form model="eldPlugin.data" fields="eldAdaptor.fields.global">
 
         <md-button type="submit" ng-if="!eldPlugin._id" class="md-raised md-primary" ng-click="eldPluginForm.$setSubmitted(true)">Add</md-button>
         <md-button ng-if="eldPlugin._id" class="md-raised md-primary" ng-click="remove()">Remove</md-button>

@@ -3,7 +3,7 @@ import angularMeteor from 'angular-meteor';
 import '/lib/Constants.js';
 import formly from 'angular-formly';
 import formlyMaterial from 'angular-formly-material';
-import angularMaterialDataTable from 'angular-material-data-table';
+//import angularMaterialDataTable from 'angular-material-data-table';
 //import angularGoogleMaps from 'angular-google-maps';
 //import NemLogging from 'angular-simple-logger';
 
@@ -17,7 +17,7 @@ mainApp = angular.module(Constants.Module, [
     'ngImgCrop',
     'formly',
     'formlyMaterial',
-    'md.data.table',
+    //'md.data.table',
     //'nemLogging',
     //NemLogging,
     //'uiGmapgoogle-maps',

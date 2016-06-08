@@ -16,6 +16,12 @@ angular.module(Constants.Module).controller('VehicleController', ['$scope', '$re
         $scope.eldAdaptors.push({ name: v.name, val: k });
     });
 
+    $scope.$watch('vehicle.eld.type', function(newVal, oldVal) {
+        if (newVal) {
+            $scope.eldAdaptor = ELD_Adaptor[newVal];
+        }
+    });
+
     $scope.submitForm = function(form) {
         console.log('form', form);
         Meteor.call('addVehicle', $scope.vehicle, function(err) {

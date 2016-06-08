@@ -13,6 +13,7 @@ Documents.allow({
 Schemas.Document = new SimpleSchema({
     _id: {
         type: String,
+        optional: true,
         label: 'Id'
     },
     createdAt: {

@@ -13,6 +13,7 @@ EldPlugins.allow({
 Schemas.EldPlugin = new SimpleSchema({
     _id: {
         type: String,
+        optional: true,
         label: 'Id'
     },
     createdAt: {

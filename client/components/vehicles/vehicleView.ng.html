@@ -51,11 +51,15 @@
         </md-select>
     </md-input-container>
 
-    <md-input-container ng-if="vehicle.eld.type">
-        <label> ELD Device ID </label>
-        <input type="text" ng-model="vehicle.eld.deviceId" name="eld.deviceId" aria-label="ELD Device ID" required />
-        <error-messages ng-model="vehicleForm.eld.deviceId"></error-messages>
-    </md-input-container>
+    <div ng-if="vehicle.eld.type">
+        <formly-form model="vehicle.eld.device" fields="eldAdaptor.fields.device"></formly-form>
+
+        <md-switch ng-model="vehicle.eld.useCustomGlobal" aria-label="Replace ELD Global Settings">
+            Replace ELD Global Settings
+        </md-switch>
+
+        <formly-form ng-if="vehicle.eld.useCustomGlobal" model="vehicle.eld.global" fields="eldAdaptor.fields.global"></formly-form>
+    </div>
 
 
     <md-button type="submit" ng-if="!vehicle._id" class="md-raised md-primary" ng-click="vehicleForm.$setSubmitted(true)">Add</md-button>

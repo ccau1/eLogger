@@ -13,6 +13,7 @@ Companies.allow({
 Schemas.Company = new SimpleSchema({
     _id: {
         type: String,
+        optional: true,
         label: 'Id'
     },
     createdAt: {

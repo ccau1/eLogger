@@ -23,16 +23,19 @@ Schemas.Address = new SimpleSchema({
     country: {
         type: String,
         label: 'Country',
+        optional: true,
         index: 1
     },
     state: {
         type: String,
         label: 'State/Province',
+        optional: true,
         index: 1
     },
     city: {
         type: String,
         label: 'City',
+        optional: true,
         index: 1
     },
     district: {

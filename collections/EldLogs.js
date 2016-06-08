@@ -13,6 +13,7 @@ EldLogs.allow({
 Schemas.EldLog = new SimpleSchema({
     _id: {
         type: String,
+        optional: true,
         label: 'Id'
     },
     timestamp: {
@@ -30,10 +31,10 @@ Schemas.EldLog = new SimpleSchema({
         type: String,
         label: 'Status'
     },
-    location: {
-        type: String,
+    addr: {
+        type: Schemas.Address,
         optional: true,
-        label: 'Location'
+        label: 'Address'
     }
 });
 

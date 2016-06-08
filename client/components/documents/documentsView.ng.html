@@ -3,49 +3,49 @@
         <md-button ng-click="add()">Add Document</md-button>
     </head-toolbar>
     <md-content>
-        <!--<md-list>-->
-            <!--<md-list-item ng-repeat="doc in documents" style="height: 100px;" layout="row" layout-padding>-->
-                <!--<div style="position: relative; height: 100%;">-->
-                    <!--<file-display ng-model="doc.file" ng-disabled="true"></file-display>-->
-                <!--</div>-->
-                <!--<div class="md-list-item-text" layout="column" flex layout-padding>-->
-                    <!--<h3 style="margin: 0;">{{ doc.title }}</h3>-->
-                    <!--<p style="margin: 0;">{{ doc.desc }}</p>-->
-                <!--</div>-->
-                <!--<div layout="column" layout-align="end" layout-padding>-->
-                    <!--<p style="text-align: right;">{{ doc.createdAt | date: 'medium' }}</p>-->
-                    <!--<div layout="row">-->
-                        <!--<md-button ng-click="edit($event, doc)">Edit</md-button>-->
-                        <!--<md-button ng-click="remove($event, doc)">Delete</md-button>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</md-list-item>-->
-        <!--</md-list>-->
-        <md-table-container>
-            <table md-table md-row-select multiple ng-model="selected" md-progress="progress">
-                <thead md-head md-order="order" md-on-reorder="">
-                <tr md-row>
-                    <th md-column><span>File</span></th>
-                    <th md-column><span>Name</span></th>
-                    <th md-column><span>Description</span></th>
-                    <th md-column><span>Timestamp</span></th>
-                    <th md-column><span>Actions</span></th>
-                </tr>
-                </thead>
-                <tbody md-body>
-                <tr md-row md-select="doc" md-select-id="{{doc._id}}" md-auto-select ng-repeat="doc in documents">
-                    <td md-cell><file-display ng-model="doc.file" ng-disabled="true"></file-display></td>
-                    <td md-cell>{{doc.name}}</td>
-                    <td md-cell>{{doc.desc}}</td>
-                    <td md-cell>{{doc.createdAt | date: 'medium' }}</td>
-                    <td md-cell>
+        <md-list>
+            <md-list-item ng-repeat="doc in documents" style="height: 100px;" layout="row" layout-padding>
+                <div style="position: relative; height: 100%;">
+                    <file-display ng-model="doc.file" ng-disabled="true"></file-display>
+                </div>
+                <div class="md-list-item-text" layout="column" flex layout-padding>
+                    <h3 style="margin: 0;">{{ doc.title }}</h3>
+                    <p style="margin: 0;">{{ doc.desc }}</p>
+                </div>
+                <div layout="column" layout-align="end" layout-padding>
+                    <p style="text-align: right;">{{ doc.createdAt | date: 'medium' }}</p>
+                    <div layout="row">
                         <md-button ng-click="edit($event, doc)">Edit</md-button>
                         <md-button ng-click="remove($event, doc)">Delete</md-button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </md-table-container>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+        <!--<md-table-container>-->
+            <!--<table md-table md-row-select multiple ng-model="selected" md-progress="progress">-->
+                <!--<thead md-head md-order="order" md-on-reorder="">-->
+                <!--<tr md-row>-->
+                    <!--<th md-column><span>File</span></th>-->
+                    <!--<th md-column><span>Name</span></th>-->
+                    <!--<th md-column><span>Description</span></th>-->
+                    <!--<th md-column><span>Timestamp</span></th>-->
+                    <!--<th md-column><span>Actions</span></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody md-body>-->
+                <!--<tr md-row md-select="doc" md-select-id="{{doc._id}}" md-auto-select ng-repeat="doc in documents">-->
+                    <!--<td md-cell><file-display ng-model="doc.file" ng-disabled="true"></file-display></td>-->
+                    <!--<td md-cell>{{doc.name}}</td>-->
+                    <!--<td md-cell>{{doc.desc}}</td>-->
+                    <!--<td md-cell>{{doc.createdAt | date: 'medium' }}</td>-->
+                    <!--<td md-cell>-->
+                        <!--<md-button ng-click="edit($event, doc)">Edit</md-button>-->
+                        <!--<md-button ng-click="remove($event, doc)">Delete</md-button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</md-table-container>-->
 
         <!--<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
     </md-content>

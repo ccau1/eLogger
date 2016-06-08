@@ -28,6 +28,7 @@ angular.module(Constants.Module).controller('EldPluginController', ['$scope', '$
 
     $scope.submitForm = function(form) {
         $scope.eldPlugin.type = $stateParams.type;
+        console.log('submitForm', $scope.eldPlugin);
         Meteor.call('addEldPlugin', $scope.eldPlugin, function(err) {
             if (!err) {
                 utils.toast('ELD Plugin Added', utils.TOAST_TYPE.SUCCESS);

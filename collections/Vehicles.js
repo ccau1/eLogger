@@ -15,9 +15,22 @@ Schemas.ELD = new SimpleSchema({
         type: String,
         label: 'Type'
     },
-    deviceId: {
-        type: String,
-        label: 'Device ID'
+    device: {
+        type: Object,
+        blackbox: true,
+        optional: true,
+        label: 'Device Data'
+    },
+    useCustomGlobal: {
+        type: Boolean,
+        defaultValue: false,
+        label: 'Is Custom Global'
+    },
+    global: {
+        type: Object,
+        blackbox: true,
+        optional: true,
+        label: 'Global Data'
     }
 });
 
@@ -25,6 +38,7 @@ Schemas.ELD = new SimpleSchema({
 Schemas.Vehicle = new SimpleSchema({
     _id: {
         type: String,
+        optional: true,
         label: 'Id'
     },
     companyId: {

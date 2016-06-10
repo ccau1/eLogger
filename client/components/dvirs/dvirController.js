@@ -1,4 +1,4 @@
-angular.module(Constants.Module).controller('VehicleController', ['$scope', '$reactive', 'user', '$stateParams', 'utils', '$state', function($scope, $reactive, s_user, $stateParams, utils, $state) {
+angular.module(Constants.Module).controller('DVIRController', ['$scope', '$reactive', 'user', '$stateParams', 'utils', '$state', function($scope, $reactive, s_user, $stateParams, utils, $state) {
     $reactive(this).attach($scope);
 
     $scope.subscribe('vehicleById', function() {
@@ -35,15 +35,7 @@ angular.module(Constants.Module).controller('VehicleController', ['$scope', '$re
     };
 
     $scope.$watch('vehicle', function(newVal, oldVal) {
-        if (newVal && newVal.eld) {
-            if (!newVal.eld.useCustomGlobal) {
-                $scope.vehicle.eld.useCustomGlobal = false;
-            }
-            if (!newVal.eld.type) {
-                delete $scope.vehicle.eld;
-            }
-        }
-
+        if (newVal && newVal.eld && !newVal.eld.useCustomGlobal) $scope.vehicle.eld.useCustomGlobal = false;
         if (oldVal != undefined && newVal._id && oldVal._id && newVal != oldVal && $scope.vehicleForm.$valid) {
             Meteor.call('updateVehicle', $scope.vehicle, function(err) {
                 if (!err) {

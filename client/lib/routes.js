@@ -16,6 +16,20 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
 
     // Dashboard
+        .state('settings.vehicle', {
+            url: "/vehicle",
+            views: {
+                'main': {},
+                'settings': {
+                    templateUrl: "client/components/settings/vehicleSettingsView.ng.html",
+                    controller: "VehicleSettingsController"
+                }
+            },
+            data: {subTitle: 'Vehicle'},
+            resolve: lodash.assign(baseResolve, {
+
+            })
+        })
         .state('account', {
             url: "/account",
             views: {
@@ -77,6 +91,45 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
                 }
             },
             data: {pageTitle: 'Document', backView: { go: 'documents', params: {} }},
+            resolve: lodash.assign(baseResolve, {
+
+            })
+        })
+        .state('dvirs', {
+            url: "/DVIRs",
+            views: {
+                'main': {
+                    templateUrl: "client/components/dvirs/dvirsView.ng.html",
+                    controller: "DVIRsController"
+                }
+            },
+            data: {pageTitle: 'DVIRs'},
+            resolve: lodash.assign(baseResolve, {
+
+            })
+        })
+        .state('newDvir', {
+            url: "/DVIRs/new",
+            views: {
+                'main': {
+                    templateUrl: "client/components/dvirs/dvirView.ng.html",
+                    controller: "DVIRController"
+                }
+            },
+            data: {pageTitle: 'DVIR', backView: { go: 'dvirs', params: {} }},
+            resolve: lodash.assign(baseResolve, {
+
+            })
+        })
+        .state('dvir', {
+            url: "/DVIRs/:id",
+            views: {
+                'main': {
+                    templateUrl: "client/components/dvirs/dvirView.ng.html",
+                    controller: "DVIRsController"
+                }
+            },
+            data: {pageTitle: 'DVIRs', backView: { go: 'dvirs', params: {} }},
             resolve: lodash.assign(baseResolve, {
 
             })

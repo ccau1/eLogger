@@ -7,8 +7,8 @@
         <label> Description </label>
         <input type="text" ng-model="document.desc" aria-label="Description" required ng-model-options="modelOptions" />
     </md-input-container>
-    <file-upload multiple="false" mode="'button'" on-change="fileUploaded(action, items)" ng-disabled="ngDisabled || document._id"></file-upload>
-    <file-display ng-if="document.file" ng-model="document.file" ng-disabled="ngDisabled || document._id"></file-display>
+    <file-upload multiple="false" mode="'button'" on-change="fileUploaded(action, items)" ng-if="!ngDisabled && !document._id"></file-upload>
+    <file-display style="height: 400px; display: block;" ng-if="document.file" ng-model="document.file" ng-disabled="ngDisabled || document._id"></file-display>
     <md-button ng-if="!document._id" class="md-raised md-primary" ng-disabled="documentForm.$pristine || documentForm.$invalid" ng-click="submitForm()">Add</md-button>
     <!--<md-button ng-if="document._id" class="md-raised md-primary" ng-disabled="documentForm.$pristine || documentForm.$invalid" ng-click="submitForm()">Update</md-button>-->
 </form>

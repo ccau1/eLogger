@@ -13,10 +13,10 @@
                     <p style="margin: 0;">{{ doc.desc }}</p>
                 </div>
                 <div layout="column" layout-align="end" layout-padding>
-                    <p style="text-align: right;">{{ doc.createdAt | date: 'medium' }}</p>
+                    <p style="text-align: right; margin: 0 auto;">{{ doc.createdAt | date: 'medium' }}</p>
                     <div layout="row">
-                        <md-button ng-click="edit($event, doc)">Edit</md-button>
-                        <md-button ng-click="remove($event, doc)">Delete</md-button>
+                        <md-button class="md-raised md-primary" ng-click="edit($event, doc)">Edit</md-button>
+                        <md-button class="md-raised md-warning" ng-click="remove($event, doc)">Delete</md-button>
                     </div>
                 </div>
             </md-list-item>

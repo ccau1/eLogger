@@ -11,6 +11,12 @@
     </md-toolbar>
     <md-content layout-padding flex>
         <md-content>
+            <div ng-if="isCurrentUserInRole(c.Role.DRIVER)">
+                <md-switch ng-model="userProfile.onDuty" aria-label="On Duty" ng-change="onDutyChange(userProfile.onDuty)">
+                    On Duty
+                </md-switch>
+                <md-divider></md-divider>
+            </div>
             <menu ng-model="menuSections" show-divider="true"></menu>
         </md-content>
     </md-content>

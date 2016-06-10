@@ -16,6 +16,7 @@ ELD_Adaptor.Connected_Telematics = {
                 key: 'password',
                 type: 'input',
                 templateOptions: {
+                    type: 'password',
                     label: 'Password',
                     required: true,
                 }
@@ -43,6 +44,7 @@ ELD_Adaptor.Connected_Telematics = {
     token: '',
     tokenObj: {},
     handleToken: function(data) {
+        console.log('handleToken fn');
         return new Promise(function(resolve, reject) {
             if (this.token && new Date(this.tokenObj['.expires']) > new Date()) {
                 // if token is already set and expiry date has not past, just resolve
@@ -54,10 +56,12 @@ ELD_Adaptor.Connected_Telematics = {
                 var cred = data.global;
                 var content = "username=" + cred.username + "&password=" + cred.password + "&scope=" + cred.database + "&grant_type=password";
 
-                Http.call('POST', 'http://a1.geotrack.co/Token', {
+                console.log('calling token http', content);
+                HTTP.call('POST', 'http://api1.greenfleetspro.com/Token', {
                     headers: headers,
                     content: content
                 }, function (err, result) {
+                    console.log('token http result', result, err);
                     if (!err) {
                         this.tokenObj = result;
                         this.token = result.access_token;
@@ -71,38 +75,41 @@ ELD_Adaptor.Connected_Telematics = {
     },
     get: function(data) {
         console.log('get fn', this, data);
+        var me = this;
         return new Promise(function(resolve, reject) {
         //    console.log('getting token', this, data);
-            this.handleToken(data).then(function (tokenObj) {
+            console.log('calling handleToken');
+            me.handleToken(data).then(function (tokenObj) {
                 console.log('done token', this.tokenObj, this.token);
-                resolve();
-            //    console.log('prepping get asset');
-            //    var headers = {};
-            //    headers['Content-Type'] = "application/json; charset=utf-8";
-            //    Http.call('GET', 'http://a1.geotrack.co/api/ClientsAssets/' + data.device.deviceId, {
-            //        data: {},
-            //        headers: {
-            //            Authorization: 'bearer ' + this.token
-            //        }
-            //    }, function (err, result) {
-            //        console.log('got asset', err, result);
-            //        if (!err) {
-            //            var log = {};
-            //            log.addr = {
-            //                lat: result.Latitude,
-            //                lng: result.Longitude,
-            //                text: result.Address
-            //            };
-            //            log.status = "";
-            //
-            //            // TODO:: render result into log obj in 'collections/EldLogs.js' structure
-            //            resolve(log);
-            //        } else {
-            //            reject(err);
-            //        }
-            //    });
+
+                console.log('prepping get asset');
+                var headers = {};
+                headers['Content-Type'] = "application/json; charset=utf-8";
+                Http.call('GET', 'http://api1.greenfleetspro.com/api/ClientsAssets/' + data.device.deviceId, {
+                    data: {},
+                    headers: {
+                        Authorization: 'bearer ' + this.token
+                    }
+                }, function (err, result) {
+                    console.log('got asset', err, result);
+                    if (!err) {
+                        var log = {};
+                        log.addr = {
+                            lat: result.Latitude,
+                            lng: result.Longitude,
+                            text: result.Address
+                        };
+                        log.status = "";
+
+                        // TODO:: render result into log obj in 'collections/EldLogs.js' structure
+                        resolve(log);
+                    } else {
+                        reject(err);
+                    }
+                });
             }).catch(function(err) {
-                console.log('getting token error ' + err);
+                // handleToken thrown err, most probably due to incorrect credentials
+                //console.log('getting token error ' + err);
                 reject(err);
             });
         });

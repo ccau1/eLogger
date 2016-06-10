@@ -1,7 +1,9 @@
 
 <md-list ng-repeat="menuSection in menuSections">
     <md-subheader class="md-no-sticky" ng-if="menuSection.header" ng-bind="menuSection.header"></md-subheader>
-    <md-list-item class="md-3-line" ng-repeat="item in menuSection.items" ng-click="item.onClick()">
+    <md-list-item class="md-3-line"
+                  ng-repeat="item in menuSection.items" ng-click="item.onClick()"
+                  ng-if="!item.ngIf || item.ngIf(item)" ng-disabled="item.ngDisabled && item.ngDisabled(item)">
         <img ng-if="item.iconUrl" ng-src="{{item.iconUrl}}?{{$index}}" class="md-avatar" alt="{{item.title}}" />
         <div class="md-list-item-text" layout="column">
             <h3>{{ item.title }}</h3>

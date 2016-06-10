@@ -11,7 +11,7 @@ angular.module(Constants.Module).controller('AccountSettingsController', ['$scop
     $scope.views = [
         { view: 'userInfo', text: 'User Information' },
         { view: 'account', text: 'Account' },
-        { view: 'theme', text: 'Theme' }
+        //{ view: 'theme', text: 'Theme' }
     ];
 
     $scope.setView = function(view) {

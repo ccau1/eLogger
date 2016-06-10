@@ -16,7 +16,7 @@ angular.module(Constants.Module).factory('user', ['$rootScope', '$reactive', '$l
 
 
     var ensureUserReady = function(callback) {
-        if (returnObj.currentUser === undefined) {
+        if (returnObj.currentUser === undefined || returnObj.currentUser === null) {
             // not ready
             setTimeout(function() {
                 ensureUserReady(callback);
@@ -47,7 +47,7 @@ angular.module(Constants.Module).factory('user', ['$rootScope', '$reactive', '$l
             var curUser = Meteor.user();
             returnObj.currentUser = curUser;
             this.currentUser = curUser;
-            curUserRoles = Roles.getRolesForUser(Meteor.userId(), 'default-group');
+            curUserRoles = Roles.getRolesForUser(Meteor.userId(), 'default');
             return curUser;
             //return Meteor.users.findOne({ _id: Meteor.userId() });
         }

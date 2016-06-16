@@ -99,7 +99,7 @@ ELD_Adaptor.Connected_Telematics = {
                             lng: result.Longitude,
                             text: result.Address
                         };
-                        log.status = "";
+                        log.status = result.CurrentStatus;
 
                         // TODO:: render result into log obj in 'collections/EldLogs.js' structure
                         resolve(log);

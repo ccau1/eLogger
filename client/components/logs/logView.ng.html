@@ -1,10 +1,8 @@
 <div layout="column" flex>
     <head-toolbar>
+        <md-button ng-click="changeStatus()">Change Status</md-button>
     </head-toolbar>
     <md-content>
-        <div ng-if="daysList.length == 0">
-            Loading dates...
-        </div>
         <md-list ng-if="daysList.length > 0">
             <md-list-item ng-repeat="day in daysList" ng-click="selectDate(day)">
                 <div class="md-list-item-text">

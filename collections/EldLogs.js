@@ -16,7 +16,7 @@ Schemas.EldLog = new SimpleSchema({
         optional: true,
         label: 'Id'
     },
-    timestamp: {
+    createdAt: {
         type: Date,
         autoValue: function() {
             if (!this.value) return new Date();

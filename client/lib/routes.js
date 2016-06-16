@@ -134,5 +134,18 @@ angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider',
 
             })
         })
+        .state('logs', {
+            url: "/logs",
+            views: {
+                'main': {
+                    templateUrl: "client/components/logs/logsView.ng.html",
+                    controller: "LogsController"
+                }
+            },
+            data: {pageTitle: 'Logs'},
+            resolve: lodash.assign(baseResolve, {
+
+            })
+        })
 
 }]);

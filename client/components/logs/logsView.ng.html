@@ -1,9 +1,14 @@
-<md-list>
-    <md-list-item ng-repeat="log in logs" ng-click="selectLog(log)">
-        <div class="md-list-item-text">
-            <h3>{{log.createdAt}}</h3>
-            <!--<h4></h4>-->
-            <p>Plate: {{vehicle.licensePlateNumber}} | VIN: {{vehicle.vin}}</p>
-        </div>
-    </md-list-item>
-</md-list>
+<div layout="column" flex>
+    <head-toolbar>
+        <md-button ng-click="add()">Add Document</md-button>
+    </head-toolbar>
+    <md-list>
+        <md-list-item ng-repeat="log in logs" ng-click="selectLog(log)">
+            <div class="md-list-item-text">
+                <h3>{{log.createdAt}}</h3>
+                <!--<h4></h4>-->
+                <p>Plate: {{vehicle.licensePlateNumber}} | VIN: {{vehicle.vin}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

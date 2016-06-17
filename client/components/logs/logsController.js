@@ -7,7 +7,7 @@ angular.module(Constants.Module).controller('LogsController', ['$scope', 'user',
         var countDate = startDate;
         if ($scope.daysList.length) $scope.daysList.splice(0, $scope.daysList.length);
         while (!countDate.isAfter(todayDate)) {
-            $scope.daysList.push({ date: lodash.clone(countDate._d) });
+            $scope.daysList.unshift({ date: lodash.clone(countDate._d) });
             countDate.add(1, 'days');
         }
     });

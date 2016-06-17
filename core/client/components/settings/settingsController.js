@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module(Constants.Module).controller('SettingsController', ['$scope', '$log', '$reactive', '$state', 'user', function ($scope, $log, $reactive, $state, s_user) {
+angular.module(Constants.Module).controller('SettingsController', ['$scope', '$reactive', '$state', 'user', function ($scope, $reactive, $state, s_user) {
     $scope.$on('$viewContentLoaded', function () {
 
     });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module(Constants.Module).controller('ThemeSettingsController', ['$scope', '$log', '$reactive', function ($scope, $log, $reactive) {
+angular.module(Constants.Module).controller('ThemeSettingsController', ['$scope', '$reactive', function ($scope, $reactive) {
     $scope.$on('$viewContentLoaded', function () {
 
     });

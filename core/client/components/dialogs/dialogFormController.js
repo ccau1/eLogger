@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module(Constants.Module).controller('DialogFormController', ['$rootScope', '$scope', '$compile', '$mdDialog', 'data', '$log', function ($rootScope, $scope, $compile, $mdDialog, data, $log) {
+angular.module(Constants.Module).controller('DialogFormController', ['$rootScope', '$scope', '$compile', '$mdDialog', 'data', function ($rootScope, $scope, $compile, $mdDialog, data) {
     $scope.formObj = data.formObj;
     $scope.type = data.type;
     $scope.data = data;

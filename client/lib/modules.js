@@ -44,7 +44,7 @@ mainApp.run(['formlyConfig', function(formlyConfig) {
 //}]);
 
 /* Setup global settings */
-mainApp.provider('settings', function () {
+mainApp.provider('settings', [function () {
     // supported languages
     var settings = {
         theme: 'theme-light',
@@ -54,15 +54,15 @@ mainApp.provider('settings', function () {
     };
 
     return settings;
-});
+}]);
 
-mainApp.run(function ($rootScope, $state) {
+mainApp.run(['$rootScope', '$state', function ($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
         if (error === 'AUTH_REQUIRED') {
             $state.go('login');
         }
     });
-});
+}]);
 
 mainApp.controller('AppController', ['$scope', '$state', function($scope, $state) {
     $scope.$state = $state;

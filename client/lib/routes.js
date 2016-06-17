@@ -1,16 +1,16 @@
 import '/lib/Constants.js';
 
-angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider', 'settingsProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, settingsProvider, $locationProvider) {
+angular.module(Constants.Module).config(['$stateProvider', function ($stateProvider) {
 
 
     let baseResolve = {
-        currentUser: function ($q) {
+        currentUser: ['$q', function ($q) {
             if (Meteor.userId() == null) {
                 return $q.reject('AUTH_REQUIRED');
             } else {
                 return $q.resolve();
             }
-        }
+        }]
     };
 
     $stateProvider

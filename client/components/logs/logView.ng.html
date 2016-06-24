@@ -4,9 +4,10 @@
     </head-toolbar>
     <md-content>
         <md-list ng-if="daysList.length > 0">
-            <md-list-item ng-repeat="day in daysList" ng-click="selectDate(day)">
+            <md-list-item ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(day)">
                 <div class="md-list-item-text">
-                    <h3>{{day.date | date: 'fullDate'}}</h3>
+                    <h3>{{tl.start | date: 'fullDate'}}</h3>
+                    <p>{{ getTimeSpan(tl) }}</p>
                 </div>
             </md-list-item>
         </md-list>

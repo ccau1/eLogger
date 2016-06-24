@@ -1,4 +1,4 @@
-angular.module(Constants.Module).directive('menu', ['$mdMedia', '$state', '$mdSidenav', function ($mdMedia, $state, $mdSidenav) {
+angular.module(Constants.Module).directive('menu', [function () {
     return {
         restrict: 'E', // E = element, A = attribute, C = class, M = comment
         scope: { // @ = local scope (string), = = bi-directional binding, & = parent execution binding (function)

@@ -14,12 +14,16 @@ angular.module(Constants.Module).controller('LogController', ['$scope', '$reacti
         }
     });
 
+    setInterval(function() {
+        console.log('dayLog', $scope.dayLog);
+    }, 1000);
+
     $scope.getTimeSpan = function(tl) {
-        var index = lodash.findIndex(dayLog.travelLog, tl);
-        if (index != dayLog.travelLog.length - 1) {
+        var index = lodash.findIndex($scope.dayLog.travelLog, tl);
+        if (index != $scope.dayLog.travelLog.length - 1) {
             // not last, do diff of start and next start
-            console.log(moment(tl.start).diff(moment(dayLog.travelLog[index + 1].start)));
-            return moment(tl.start).diff(moment(dayLog.travelLog[index + 1].start));
+            console.log(moment(tl.start).diff(moment($scope.dayLog.travelLog[index + 1].start)));
+            return moment(tl.start).diff(moment($scope.dayLog.travelLog[index + 1].start));
         } else {
             // last one, just do diff of start and cur time
             var tmr = moment().startOf('day').add(1, 'days');
@@ -28,7 +32,7 @@ angular.module(Constants.Module).controller('LogController', ['$scope', '$reacti
                 return moment(tl.start).diff(moment($stateParams.date).add(1, 'days'));
             } else {
                 // daylog is today, give diff of start to cur time
-                return moment(tl.start).diff(moment());
+                return moment(moment().valueOf() - tl.start).format('HH:mm:ss');
             }
         }
     }

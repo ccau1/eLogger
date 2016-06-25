@@ -45,6 +45,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     subtitle: '',
                     desc: 'Management Center',
                     ngIf: function() {
+                        console.log('menuSections currentUser', s_user.currentUser);
                         return s_user.currentUser && s_user.currentUser.roles.default.indexOf(Constants.Role.ADMIN) != -1;
                     },
                     onClick: function() {

@@ -22,12 +22,13 @@ Meteor.publish("dayLogByDate", function (date) {
 
     lodash.extend(filter, filterByRole());
     var result = DayLogs.find(filter);
-    console.log(result.fetch().length);
+    console.log('dayLogByDate result', result.fetch().length, result.fetch());
     if (result.fetch().length == 0) {
         var lastDayLog = DayLogs.findOne({ date: { $lt: datestamp } }, { sort: { date: -1 } });
         var lastStatus = lastDayLog ? lastDayLog.lastStatus : Constants.Log.Status.OFF;
+        var usr = Meteor.users.findOne({ _id: this.userId });
         // TODO:: should be according to yesterday's status
-        DayLogs.insert({ date: datestamp, travelLog: [{ start: datestamp, status: lastStatus }], lastStatus: lastStatus, userId: this.userId });
+        DayLogs.insert({ date: datestamp, travelLog: [{ start: datestamp, status: lastStatus }], lastStatus: lastStatus, userId: this.userId, companyId: usr.profile.company });
         result = DayLogs.find(filter);
     }
 

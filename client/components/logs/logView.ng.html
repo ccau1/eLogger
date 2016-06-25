@@ -3,12 +3,14 @@
         <md-button ng-click="changeStatus()">Change Status</md-button>
     </head-toolbar>
     <md-content>
-        <md-list ng-if="daysList.length > 0">
-            <md-list-item ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(day)">
+        <md-list>
+            <md-list-item ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(tl)">
                 <div class="md-list-item-text">
-                    <h3>{{tl.start | date: 'fullDate'}}</h3>
+                    <h3>{{tl.start | date: 'mediumTime'}}</h3>
                     <p>{{ getTimeSpan(tl) }}</p>
                 </div>
+                <span flex></span>
+                <md-badge>{{tl.status}}</md-badge>
             </md-list-item>
         </md-list>
     </md-content>

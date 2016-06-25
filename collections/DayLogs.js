@@ -60,16 +60,13 @@ Schemas.DayLog = new SimpleSchema({
     companyId: {
         type: String,
         label: 'Company ID',
-        optional: true,
-        autoValue: function() {
-            // TODO:: for some reason _id throws error...but inserts company id properly
-            if (!this.value && Meteor.isServer) {
-                var usr = Meteor.user();
-                console.log('usr', usr, usr.profile);
-
-                return Companies.findOne({ _id: usr.profile.companyId })._id;
-            }
-        },
+        //autoValue: function() {
+        //    // TODO:: for some reason _id throws error...but inserts company id properly
+        //    if (!this.value && Meteor.isServer) {
+        //        //var usr = Meteor.user();
+        //        //return Companies.findOne({ _id: usr.profile.companyId })._id;
+        //    }
+        //},
     },
 });
 

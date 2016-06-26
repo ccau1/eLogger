@@ -1,0 +1,15 @@
+<md-dialog aria-label="Shop Form" ng-cloak flex="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Cancel">
+                <md-icon md-svg-src="img/icons/ic_close_white_24px.svg"></md-icon>
+            </md-button>
+            <h2 flex style="text-align: center">{{title}}</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <log-status-select ng-model="data.status" on-submit="onSubmit(type, obj)"></log-status-select>
+        </div>
+    </md-dialog-content>
+</md-dialog>

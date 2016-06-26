@@ -75,6 +75,23 @@ DayLogs.attachSchema(Schemas.DayLog);
 
 
 Meteor.methods({
+    addDayLogTravelLog: function(id, status, time, callback) {
+        var dl = DayLogs.findOne({ _id: id });
+        if (!dl) return false;
+
+        var existingTravelLog = lodash.find(dl.travelLog, { 'start': time });
+        if (existingTravelLog) {
+            _.remove(dl.travelLog, existingTravelLog);
+        }
+
+
+        dl.travelLog.push({ start: time, status: status });
+        dl.lastStatus = status;
+
+        dl.travelLog = _.sortBy(dl.travelLog, ['start']);
+        delete dl._id;
+        DayLogs.update({_id: id}, {$set: dl}, callback);
+    },
     addDayLog: function(obj, callback) {
         DayLogs.insert(obj, callback);
     },

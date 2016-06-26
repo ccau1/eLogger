@@ -1,17 +1,30 @@
 <div layout="column" flex>
     <head-toolbar>
-        <md-button ng-click="changeStatus()">Change Status</md-button>
     </head-toolbar>
     <md-content>
         <md-list>
-            <md-list-item ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(tl)">
-                <div class="md-list-item-text">
-                    <h3>{{tl.start | date: 'mediumTime'}}</h3>
-                    <p>{{ getTimeSpan(tl) }}</p>
+            <md-list-item class="md-3-line" ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(tl)">
+                <div layout="row">
+                    <md-badge class="circle" style="margin-right: 15px; width: 19px;">{{tl.status}}</md-badge>
+                    <div class="md-list-item-text">
+                        <h3>{{tl.start | date: 'h:mm a'}}</h3>
+                        <p><i class="fa fa-clock-o"></i> {{ getTimeSpan(tl) }}</p>
+                    </div>
                 </div>
                 <span flex></span>
-                <md-badge>{{tl.status}}</md-badge>
             </md-list-item>
         </md-list>
     </md-content>
+    <md-fab-speed-dial ng-cloak md-open="false" md-direction="up" class="md-fling" style="position: fixed; bottom: 10px; right: 10px;">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn">
+                <md-icon md-svg-src="img/icons/ic_menu_white_24px.svg"></md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-fab-actions aria-hidden="true">
+            <md-button aria-label="Change Status" class="md-fab md-raised md-mini" ng-click="changeStatus($event)">
+                <md-icon md-svg-src="img/icons/ic_rotate_right_black_24px.svg" aria-label="Change Status"></md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
 </div>

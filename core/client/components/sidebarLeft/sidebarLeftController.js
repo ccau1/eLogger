@@ -45,8 +45,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     subtitle: '',
                     desc: 'Management Center',
                     ngIf: function() {
-                        console.log('menuSections currentUser', s_user.currentUser);
-                        return s_user.currentUser && s_user.currentUser.roles.default.indexOf(Constants.Role.ADMIN) != -1;
+                        return s_user.currentUser && s_user.currentUser.roles && s_user.currentUser.roles.default.indexOf(Constants.Role.ADMIN) != -1;
                     },
                     onClick: function() {
                         $state.go('admin');
@@ -58,7 +57,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                     subtitle: '',
                     desc: '',
                     ngIf: function() {
-                        return s_user.currentUser && s_user.currentUser.roles.default.indexOf(Constants.Role.DRIVER) != -1;
+                        return s_user.currentUser && s_user.currentUser.roles && s_user.currentUser.roles.default.indexOf(Constants.Role.DRIVER) != -1;
                     },
                     onClick: function() {
                         $state.go('logs');

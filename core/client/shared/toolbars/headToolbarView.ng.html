@@ -2,10 +2,10 @@
     <div class="md-toolbar-tools">
         <md-button ng-if="!$state.current.data.backView" class="md-icon-button" ng-hide="$mdMedia('gt-md')" ng-click="toggleMainMenu()" aria-label="Toggle Menu"><md-icon md-svg-src="img/icons/ic_dehaze_white_24px.svg"></md-icon></md-button>
         <md-button ng-if="$state.current.data.backView" class="md-icon-button" ng-click="goBack()" aria-label="Navigate Back"><md-icon md-svg-src="img/icons/ic_arrow_back_white_24px.svg"></md-icon></md-button>
-        <h2>
+        <h2 flex style="text-align: center;">
             <span data-ng-bind="title ? title : $state.current.data.pageTitle"></span> <small ng-if="$state.current.data.subTitle"> - {{$state.current.data.subTitle}}</small>
         </h2>
-        <span flex></span>
+        <!--<span flex></span>-->
         <div ng-transclude></div>
     </div>
 </md-toolbar>

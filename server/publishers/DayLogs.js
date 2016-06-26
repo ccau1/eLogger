@@ -28,7 +28,7 @@ Meteor.publish("dayLogByDate", function (date) {
         var lastStatus = lastDayLog ? lastDayLog.lastStatus : Constants.Log.Status.OFF;
         var usr = Meteor.users.findOne({ _id: this.userId });
         // TODO:: should be according to yesterday's status
-        DayLogs.insert({ date: datestamp, travelLog: [{ start: datestamp, status: lastStatus }], lastStatus: lastStatus, userId: this.userId, companyId: usr.profile.company });
+        DayLogs.insert({ date: datestamp, travelLog: [{ start: datestamp, status: lastStatus }], lastStatus: lastStatus, userId: this.userId, companyId: usr.profile.companyId });
         result = DayLogs.find(filter);
     }
 

@@ -6,9 +6,10 @@
             Loading dates...
         </div>
         <md-list ng-if="daysList.length > 0">
-            <md-list-item ng-repeat="day in daysList" ng-click="selectDate(day)">
+            <md-list-item class="md-3-line" ng-repeat="day in daysList" ng-click="selectDate(day)">
                 <div class="md-list-item-text">
                     <h3>{{day.date | date: 'fullDate'}}</h3>
+                    <!--<p><md-icon md-svg-src="img/icons/ic_access_time_black_24px.svg" aria-label="Timespan"></md-icon></p>-->
                 </div>
             </md-list-item>
         </md-list>

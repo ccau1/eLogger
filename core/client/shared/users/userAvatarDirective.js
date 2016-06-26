@@ -63,7 +63,7 @@ angular.module(Constants.Module).directive('userAvatar', ['$reactive', 'user', '
 
 			$scope.setAvatar = function(ev) {
 				if (!$scope.allowSet) return;
-				utils.dialog(ev, 'client/components/core/dialogs/dialogUserAvatarFormView.ng.html', 'DialogFormController', {
+				utils.dialog(ev, 'client/components/dialogs/dialogUserAvatarFormView.ng.html', 'DialogFormController', {
 					title: 'Set Avatar'
 				})
 				.then(function (result) {

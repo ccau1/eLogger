@@ -1,0 +1,4 @@
+﻿<md-button flex="50" class="md-raised" ng-class="{'md-warn': ngModel == status.name}" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
+
+
+<md-button class="md-raised md-primary" ng-click="confirmStatus()">Set Status</md-button>

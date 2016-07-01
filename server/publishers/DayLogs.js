@@ -1,7 +1,7 @@
 Meteor.publish("dayLogs", function () {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = {};
-    lodash.extend(filter, filterByRole());
+    filter = lodash.extend(filter, filterByRole());
 
     return DayLogs.find(filter, { sort: { date: -1 }});
 });
@@ -10,7 +10,7 @@ Meteor.publish("dayLogById", function (id) {
     var usr = Meteor.users.findOne({ _id: this.userId });
     var filter = { _id: id };
 
-    lodash.extend(filter, filterByRole());
+    filter = lodash.extend(filter, filterByRole());
 
     return DayLogs.find(filter);
 });
@@ -20,7 +20,7 @@ Meteor.publish("dayLogByDate", function (date) {
     var datestamp = moment(date).startOf('day').valueOf();
     var filter = { date: datestamp };
 
-    lodash.extend(filter, filterByRole());
+    filter = lodash.extend(filter, filterByRole());
     var result = DayLogs.find(filter);
     console.log('dayLogByDate result', result.fetch().length, result.fetch());
     if (result.fetch().length == 0) {

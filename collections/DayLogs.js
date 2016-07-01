@@ -1,4 +1,5 @@
 DayLogs = new Mongo.Collection('dayLogs');
+DayLogSummaries = new Mongo.Collection('dayLogSummaries');
 
 DayLogs.allow({
     insert: function(userId, doc) {
@@ -81,7 +82,7 @@ Meteor.methods({
 
         var existingTravelLog = lodash.find(dl.travelLog, { 'start': time });
         if (existingTravelLog) {
-            _.remove(dl.travelLog, existingTravelLog);
+            dl.travelLog = _.remove(dl.travelLog, existingTravelLog);
         }
 
 
@@ -102,5 +103,68 @@ Meteor.methods({
     },
     deleteDayLog: function(id) {
         DayLogs.remove(id);
+    },
+    getDayLogSummaryList: function(datestamp) {
+        function filterByRole() {
+            var usr = Meteor.users.findOne({ _id: this.userId });
+            var filter = {};
+            if (Roles.userIsInRole(this.userId, 'admin')) {
+                filter.company = usr.profile.companyId;
+            } else if (Roles.userIsInRole(this.userId, 'driver')) {
+                filter.company = usr.profile.companyId;
+                filter.owner = usr._id;
+            }
+
+            return filter;
+        }
+
+
+        function quarterTime(time, roundType) {
+            time.set('second', 0);
+            var min = time.get('minute');
+            var newMin = 0;
+            if (min < 15) {
+                newMin = 0;
+            } else if (min < 30) {
+                newMin = 15;
+            } else if (min < 45) {
+                newMin = 30;
+            } else if (min < 60) {
+                newMin = 45;
+            }
+
+            if (roundType == Constants.Round.CEIL) {
+                newMin += 15;
+                if (newMin == 60) newMin = 0;
+            }
+
+            return time.set('minute', newMin);
+        }
+
+        function addTotalTravelTime(daylogs) {
+            lodash.each(daylogs, function (dl, dl_k) {
+                daylogs[dl_k].totalTravelTime = 0;
+                lodash.each(dl.travelLog, function (tl, tl_k) {
+                    if (tl.status == Constants.Log.Status.D) {
+                        if (tl_k == dl.travelLog.length - 1) {
+                            // last item for the day, get diff to end of day or current time (if date is today)
+                            var endTime = moment().valueOf() > moment(tl.start).startOf('day').add(1, 'days').valueOf() ? moment(tl.start).startOf('day').add(1, 'days').valueOf() : quarterTime(moment(), Constants.Round.CEIL).valueOf();
+                            daylogs[dl_k].totalTravelTime += dl.travelLog[tl_k + 1].start - tl.start;
+                        } else {
+                            // not last item, get end time from next item
+                            daylogs[dl_k].totalTravelTime += dl.travelLog[tl_k + 1].start - tl.start;
+                        }
+                    }
+                });
+            });
+        }
+
+        var filter = { date: datestamp };
+
+        var daylogs = DayLogs.find(lodash.assign(filter, filterByRole()), { sort: { date: -1 }}).fetch();
+
+        addTotalTravelTime(daylogs);
+
+        return daylogs;
     }
 })

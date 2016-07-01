@@ -1,0 +1,28 @@
+<div layout="column" layout-fill>
+    <head-toolbar>
+    </head-toolbar>
+    <md-content layout-fill>
+        <md-tabs md-border-bottom md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout-fill>
+            <md-tab label="Log" layout-fill>
+                <md-tab-body layout-fill>
+                    <logs ng-model="dayLog" date="date" layout-fill></logs>
+                </md-tab-body>
+            </md-tab>
+            <md-tab label="Form">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Form</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                </md-content>
+            </md-tab>
+            <md-tab label="Sign">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Sign</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                </md-content>
+            </md-tab>
+            <md-tab label="DVIR" layout-fill>
+                <dvirs date="date" layout-fill></dvirs>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

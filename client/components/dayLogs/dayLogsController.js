@@ -1,4 +1,6 @@
-angular.module(Constants.Module).controller('LogsController', ['$scope', 'user', '$state', function($scope, s_user, $state) {
+angular.module(Constants.Module).controller('DayLogsController', ['$scope', 'user', '$state', '$reactive', function($scope, s_user, $state, $reactive) {
+    $reactive(this).attach($scope);
+
     var startDate, todayDate;
     $scope.daysList = [];
     s_user.onReady(function() {
@@ -12,7 +14,9 @@ angular.module(Constants.Module).controller('LogsController', ['$scope', 'user',
         }
     });
 
+
+
     $scope.selectDate = function(day) {
-        $state.go('log', { date: moment(day.date).format('MM-DD-YYYY') });
+        $state.go('dayLog', { date: moment(day.date).format('MM-DD-YYYY') });
     };
 }]);

@@ -134,12 +134,12 @@ angular.module(Constants.Module).config(['$stateProvider', function ($stateProvi
 
             })
         })
-        .state('logs', {
-            url: "/logs",
+        .state('dayLogs', {
+            url: "/dayLogs",
             views: {
                 'main': {
-                    templateUrl: "client/components/logs/logsView.ng.html",
-                    controller: "LogsController"
+                    templateUrl: "client/components/dayLogs/dayLogsView.ng.html",
+                    controller: "DayLogsController"
                 }
             },
             data: {pageTitle: 'Logs'},
@@ -147,18 +147,44 @@ angular.module(Constants.Module).config(['$stateProvider', function ($stateProvi
 
             })
         })
-        .state('log', {
-            url: "/logs/:date",
+        .state('dayLog', {
+            url: "/dayLogs/:date",
             views: {
                 'main': {
-                    templateUrl: "client/components/logs/logView.ng.html",
-                    controller: "LogController"
+                    templateUrl: "client/components/dayLogs/dayLogView.ng.html",
+                    controller: "DayLogController"
                 }
             },
-            data: {pageTitle: 'Log', backView: { go: 'logs', params: {}}},
+            data: {pageTitle: 'Logs', backView: { go: 'dayLogs', params: {}}},
             resolve: lodash.assign(baseResolve, {
 
             })
         })
+        // .state('logs', {
+        //    url: "/logs",
+        //    views: {
+        //        'main': {
+        //            templateUrl: "client/components/logs/logsView.ng.html",
+        //            controller: "LogsController"
+        //        }
+        //    },
+        //    data: {pageTitle: 'Logs'},
+        //    resolve: lodash.assign(baseResolve, {
+        //
+        //    })
+        //})
+        //.state('log', {
+        //    url: "/logs/:date",
+        //    views: {
+        //        'main': {
+        //            templateUrl: "client/components/logs/logView.ng.html",
+        //            controller: "LogController"
+        //        }
+        //    },
+        //    data: {pageTitle: 'Log', backView: { go: 'logs', params: {}}},
+        //    resolve: lodash.assign(baseResolve, {
+        //
+        //    })
+        //})
 
 }]);

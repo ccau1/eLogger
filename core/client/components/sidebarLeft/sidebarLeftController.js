@@ -60,7 +60,7 @@ angular.module(Constants.Module).controller('SidebarLeftController', ['$scope', 
                         return s_user.currentUser && s_user.currentUser.roles && s_user.currentUser.roles.default.indexOf(Constants.Role.DRIVER) != -1;
                     },
                     onClick: function() {
-                        $state.go('logs');
+                        $state.go('dayLogs');
                         $mdSidenav('left').close();
                     }
                 },

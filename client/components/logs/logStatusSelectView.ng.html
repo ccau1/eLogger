@@ -1,15 +1,14 @@
 <md-dialog aria-label="Shop Form" ng-cloak flex="100">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Cancel">
-                <md-icon md-svg-src="img/icons/ic_close_white_24px.svg"></md-icon>
-            </md-button>
+            <md-button aria-label="Cancel" ng-click="cancel()">Cancel</md-button>
             <h2 flex style="text-align: center">{{title}}</h2>
+            <md-button aria-label="Save" ng-click="save()">Save</md-button>
         </div>
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-            <log-status-select ng-model="data.status" on-submit="onSubmit(type, obj)"></log-status-select>
+            <md-button flex="50" class="md-raised" ng-class="{'md-warn': ngModel == status.name}" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
         </div>
     </md-dialog-content>
 </md-dialog>

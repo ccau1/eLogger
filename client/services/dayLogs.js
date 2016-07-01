@@ -4,7 +4,6 @@ angular.module(Constants.Module).factory('dayLogs', ['$rootScope', '$reactive', 
 
 
     function displayTime(time) {
-        console.log('displayTime', time);
         return (time.get('hour') > 0 ? time.get('hour') + ' hr ' : '') + (time.get('minute') > 0 ? time.get('minute') + ' min ' : '');
     }
 

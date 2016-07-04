@@ -8,15 +8,34 @@
         </div>
     </md-toolbar>
     <md-content flex>
-        <md-tabs md-border-bottom md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout-fill>
+        <md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout-fill>
             <md-tab label="General" layout-fill>
                 <md-tab-body layout-fill>
-
+                    <div layout-padding>
+                        <md-input-container class="md-block">
+                            <label>Time</label>
+                            <input ng-model="dvir.timestamp" placeholder="Time">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Carrier</label>
+                            <input ng-model="dvir.carrier" placeholder="Carrier">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Location</label>
+                            <input ng-model="dvir.location" placeholder="Location">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Odometer</label>
+                            <input ng-model="dvir.odometer" placeholder="Odometer">
+                        </md-input-container>
+                    </div>
                 </md-tab-body>
             </md-tab>
             <md-tab label="Vehicle" layout-fill>
-                <md-tab-body layout-fill>
-
+                <md-tab-body layout-fill layout-padding>
+                    <dvir-defects ng-model="dvir.vehicle" type="'vehicle'" multiple="false"></dvir-defects>
+                    <md-divider></md-divider>
+                    <dvir-defects ng-model="dvir.trailer" type="'trailer'" multiple="true"></dvir-defects>
                 </md-tab-body>
             </md-tab>
             <md-tab label="Sign" layout-fill>

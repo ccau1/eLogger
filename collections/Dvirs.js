@@ -47,6 +47,10 @@ Schemas.DVIR = new SimpleSchema({
         },
         label: 'Timestamp'
     },
+    carrier: {
+        type: String,
+        label: 'Carrier'
+    },
     location: {
         type: String,
         label: 'Location'
@@ -54,10 +58,6 @@ Schemas.DVIR = new SimpleSchema({
     odometer: {
         type: Number,
         label: 'Odometer'
-    },
-    carrier: {
-        type: String,
-        label: 'Carrier'
     },
     vehicle: {
         type: Schemas.DefectReport,

@@ -20,9 +20,14 @@ angular.module(Constants.Module).directive('logs', ['user', 'utils', 'dayLogs', 
 					//console.log('result', result);
 					//$scope.dayLog.lastStatus = result.obj;
 					//$scope.dayLog.travelLog.push({ start: moment().valueOf(), status: result.obj });
+
 					Meteor.call('addDayLogTravelLog', $scope.dayLog._id, result.obj, dayLogs.quarterTime(moment(), Constants.Round.FLOOR).valueOf(), function(err) {
 						if (!err) {
-							utils.toast('Status Changed to: ' + result.obj, utils.TOAST_TYPE.SUCCESS);
+							if (result.obj.status) {
+								utils.toast('Status Changed to: ' + result.obj.status, utils.TOAST_TYPE.SUCCESS);
+							} else {
+								utils.toast('Note Added', utils.TOAST_TYPE.SUCCESS);
+							}
 						} else {
 							utils.toast('Status Change error: ' + err.reason, utils.TOAST_TYPE.FAIL);
 						}

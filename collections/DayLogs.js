@@ -18,7 +18,13 @@ Schemas.TravelLog = new SimpleSchema({
     },
     status: {
         type: String,
+        optional: true,
         label: 'Status'
+    },
+    note: {
+        type: String,
+        optional: true,
+        label: 'Note'
     }
 });
 
@@ -76,18 +82,22 @@ DayLogs.attachSchema(Schemas.DayLog);
 
 
 Meteor.methods({
-    addDayLogTravelLog: function(id, status, time, callback) {
+    addDayLogTravelLog: function(id, travelLog, time, callback) {
         var dl = DayLogs.findOne({ _id: id });
         if (!dl) return false;
 
-        var existingTravelLog = lodash.find(dl.travelLog, { 'start': time });
-        if (existingTravelLog) {
-            dl.travelLog = _.remove(dl.travelLog, existingTravelLog);
+        // TODO:: need to validate it has either note or status
+
+        if (travelLog.status) {
+            var existingTravelLogIndex = lodash.findIndex(dl.travelLog, function(o) { return o.start == travelLog.start && o.status; });
+            if (existingTravelLogIndex > -1) {
+                dl.travelLog.splice(existingTravelLogIndex, 1);// = _.remove(dl.travelLog, existingTravelLog);
+            }
         }
 
 
-        dl.travelLog.push({ start: time, status: status });
-        dl.lastStatus = status;
+        dl.travelLog.push(travelLog);
+        dl.lastStatus = travelLog.status;
 
         dl.travelLog = _.sortBy(dl.travelLog, ['start']);
         delete dl._id;

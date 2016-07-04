@@ -2,10 +2,12 @@
     <head-toolbar>
     </head-toolbar>
     <md-content layout-fill>
-        <md-tabs md-border-bottom md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout-fill>
-            <md-tab label="Log" layout-fill>
-                <md-tab-body layout-fill>
-                    <logs ng-model="dayLog" date="date" layout-fill></logs>
+        <md-tabs md-dynamic-height md-stretch-tabs md-center-tabs md-selected="selectedTab" md-align-tabs="top" layout="column" flex>
+            <md-tab label="Log" layout="column" flex layout-fill>
+                <md-tab-body layout="column" flex>
+                    <!--<md-content layout="column" flex>-->
+                        <logs ng-model="dayLog" date="date" layout-fill></logs>
+                    <!--</md-content>-->
                 </md-tab-body>
             </md-tab>
             <md-tab label="Form">

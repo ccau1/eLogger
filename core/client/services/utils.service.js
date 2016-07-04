@@ -1,15 +1,16 @@
 angular.module(Constants.Module).factory('utils', ['$rootScope', '$mdDialog', '$mdMedia', '$mdToast', function($rootScope, $mdDialog, $mdMedia, $mdToast) {
 
     var dialog = function(ev, templateUrl, controller, data, options) {
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $rootScope.dialogFullscreen;
+        //var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $rootScope.dialogFullscreen;
 
-        if ($rootScope.dialogFullscreen == undefined) {
-            $rootScope.$watch(function () {
-                return $mdMedia('xs') || $mdMedia('sm');
-            }, function (wantsFullScreen) {
-                $rootScope.dialogFullscreen = (wantsFullScreen === true);
-            });
-        }
+        //if ($rootScope.dialogFullscreen == undefined) {
+        //    $rootScope.$watch(function () {
+        //        return $mdMedia('xs') || $mdMedia('sm');
+        //    }, function (wantsFullScreen) {
+        //        $rootScope.dialogFullscreen = (wantsFullScreen === true);
+        //    });
+        //}
+
 
         var opts = {
             controller: controller,

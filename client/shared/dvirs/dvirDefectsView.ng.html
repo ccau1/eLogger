@@ -1,0 +1,23 @@
+﻿<div layout-padding>
+    <md-input-container class="md-block">
+        <label ng-bind="type"></label>
+        <input ng-model="dvirDefects.componentId" placeholder="Truck/Tractor Number" required>
+    </md-input-container>
+    <!--<defect-list ng-model="dvirDefects.defects"></defect-list>-->
+    <md-list class="md-dense">
+        <div ng-if="!defects.length" style="color: rgba(183, 177, 177, 0.87);" layout-align="center" layout="row"><span class="fa fa-wrench"></span>&nbsp;No Defects Found</div>
+        <md-list-item ng-repeat="defect in defects">
+            <h3 ng-bind="defect.name"></h3>
+            <p ng-bind="defect.comment"></p>
+        </md-list-item>
+    </md-list>
+    <md-button md-no-ink class="md-primary" ng-click="openDefectSelect = !openDefectSelect"><span class="fa fa-plus"></span> Add/Remove Vehicle Defects</md-button>
+
+    <md-list class="md-dense" ng-show="openDefectSelect">
+        <div ng-if="!defects.length" style="color: rgba(183, 177, 177, 0.87);" layout-align="center" layout="row"><span class="fa fa-wrench"></span>&nbsp;No Defects Found</div>
+        <md-list-item ng-repeat="availDefect in availableDefects">
+            <h3 ng-bind="availDefect.name"></h3>
+            <p ng-bind="defect.comment"></p>
+        </md-list-item>
+    </md-list>
+</div>

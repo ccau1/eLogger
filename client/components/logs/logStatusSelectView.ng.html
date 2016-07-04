@@ -8,7 +8,11 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-            <md-button flex="50" class="md-raised" ng-class="{'md-warn': ngModel == status.name}" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
+            <md-button flex="50" class="md-raised" ng-class="{'md-warn': statusObj.status == status.name}" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
         </div>
+        <md-input-container class="md-block">
+            <label>Notes</label>
+            <input ng-model="statusObj.note" placeholder="Notes">
+        </md-input-container>
     </md-dialog-content>
 </md-dialog>

@@ -1,46 +1,88 @@
 <div layout="column" flex>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button aria-label="Cancel">Cancel</md-button>
-            <h2>New DVIR</h2>
+            <md-button aria-label="Cancel" ng-click="cancel()">Cancel</md-button>
+            <h2>{{ dvir._id ? 'Edit':'New' }} DVIR</h2>
             <span flex></span>
-            <md-button aria-label="Save">Save</md-button>
+            <md-button aria-label="Save" ng-click="save(dvir)">Save</md-button>
         </div>
     </md-toolbar>
-    <md-content flex>
-        <md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout-fill>
-            <md-tab label="General" layout-fill>
-                <md-tab-body layout-fill>
-                    <div layout-padding>
-                        <md-input-container class="md-block">
-                            <label>Time</label>
-                            <input ng-model="dvir.timestamp" placeholder="Time">
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Carrier</label>
-                            <input ng-model="dvir.carrier" placeholder="Carrier">
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Location</label>
-                            <input ng-model="dvir.location" placeholder="Location">
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Odometer</label>
-                            <input ng-model="dvir.odometer" placeholder="Odometer">
-                        </md-input-container>
-                    </div>
+    <md-content layout="column" flex>
+        <md-tabs md-border-bottom md-stretch-tabs="always" md-center-tabs="true" md-selected="selectedTab" md-align-tabs="top" layout="column" flex>
+            <md-tab layout="column" flex>
+                <md-tab-label>
+                    General <md-icon ng-if="dvir_generalForm.$submitted && dvir_generalForm.$invalid" md-svg-src="img/icons/ic_error_outline_black_24px.svg"></md-icon>
+                </md-tab-label>
+                <md-tab-body layout="column" flex>
+                    <md-content layout-padding>
+                        <form name="dvir_generalForm" layout="column" flex>
+                            <md-input-container class="md-block">
+                                <label>Carrier</label>
+                                <input name="carrier" ng-model="dvir.carrier" placeholder="Carrier" required>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Location</label>
+                                <input name="location" ng-model="dvir.location" placeholder="Location" required>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Odometer</label>
+                                <input type="number" name="odometer" ng-model="dvir.odometer" placeholder="Odometer" required>
+                            </md-input-container>
+                        </form>
+                    </md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab label="Vehicle" layout-fill>
-                <md-tab-body layout-fill layout-padding>
-                    <dvir-defects ng-model="dvir.vehicle" type="'vehicle'" multiple="false"></dvir-defects>
-                    <md-divider></md-divider>
-                    <dvir-defects ng-model="dvir.trailer" type="'trailer'" multiple="true"></dvir-defects>
-                </md-tab-body>
-            </md-tab>
-            <md-tab label="Sign" layout-fill>
-                <md-tab-body layout-fill>
+            <md-tab layout="column" flex>
+                <md-tab-label>
+                    Vehicle <md-icon ng-if="dvir_vehicleForm.$submitted && dvir_vehicleForm.$invalid" md-svg-src="img/icons/ic_error_outline_black_24px.svg"></md-icon>
+                </md-tab-label>
+                <md-tab-body layout="column" flex layout-padding>
+                    <form name="dvir_vehicleForm" layout="column" flex layout-padding>
 
+                        <md-input-container class="md-block">
+                            <label>Vehicle</label>
+                            <input type="text" name="vehicleComponentId" ng-model="dvir.vehicle.componentId" placeholder="Truck/Tractor Number" required>
+                        </md-input-container>
+                        <dvir-defects name="vehicle_defects" ng-model="dvir.vehicle.defects"></dvir-defects>
+                        <br />
+                        <md-divider></md-divider>
+                        <br />
+                        <md-chips ng-model="dvir.trailer.componentIds" name="trailerComponentIds" readonly="false" md-max-chips="3" placeholder="Trailer Numbers">
+                            <input ng-show="dvir.trailer.componentIds.length < 3" type="text" placeholder="Trailer Numbers">
+                        </md-chips>
+                        <dvir-defects name="trailer_defects" ng-model="dvir.trailer.defects"></dvir-defects>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+            <md-tab layout="column" flex>
+                <md-tab-label>
+                    Sign <md-icon ng-if="dvir_signForm.$submitted && dvir_signForm.$invalid" md-svg-src="img/icons/ic_error_outline_black_24px.svg"></md-icon>
+                </md-tab-label>
+                <md-tab-body layout="column" flex layout-padding>
+                    <form name="dvir_signForm" layout="column" layout-padding flex>
+                        <p>I declare that the vehicle has been inspected in accordance with the applicable requirements of Schedule 1 and/or jurisdiction legislation.</p>
+                        <div ng-if="dvir.vehicle.defects.length > 0 || dvir.trailer.defects.length > 0">
+                            <br />
+                            <md-divider></md-divider>
+                            <br />
+                            <md-checkbox ng-model="dvir.defectsCorrected" aria-label="Defects Corrected">
+                                Defects Corrected
+                            </md-checkbox>
+                            <md-checkbox ng-model="dvir.defectsNeedNotCorrect" aria-label="Defects Corrected">
+                                Defects Need Not Be Corrected
+                            </md-checkbox>
+                        </div>
+                        <div layout-padding>
+                            <h3 ng-class="{ error: dvir_signForm.$submitted && dvir_signForm.driver.$invalid }">Driver Signature</h3>
+                            <md-divider ng-class="{ error: dvir_signForm.$submitted && dvir_signForm.driver.$invalid }"></md-divider>
+                            <signature ng-model="dvir.signatures.driver" name="driver" type="DVIR" required></signature>
+                        </div>
+                        <div ng-if="dvir.vehicle.defects.length > 0 || dvir.trailer.defects.length > 0" layout-padding>
+                            <h3 ng-class="{ error: dvir_signForm.$submitted && dvir_signForm.mechanic.$invalid }">Mechanic Signature</h3>
+                            <md-divider ng-class="{ error: dvir_signForm.$submitted && dvir_signForm.mechanic.$invalid }"></md-divider>
+                            <signature ng-model="dvir.signatures.mechanic" name="mechanic" type="DVIR"></signature>
+                        </div>
+                    </form>
                 </md-tab-body>
             </md-tab>
         </md-tabs>

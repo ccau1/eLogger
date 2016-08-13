@@ -1,0 +1,7 @@
+﻿<div ng-if="!signature">
+    <md-button class="md-raised" ng-click="sign($event)">Sign {{type}}</md-button>
+</div>
+<div ng-if="signature" layout="column" layout-align="center">
+    <img ng-src="{{signature}}" />
+    <md-button ng-click="clear($event)">Clear Signature</md-button>
+</div>

@@ -19,6 +19,8 @@ angular.module(Constants.Module).factory('utils', ['$rootScope', '$mdDialog', '$
             targetEvent: ev ? ev : angular.element(document.body),
             clickOutsideToClose: true,
             fullscreen: true,
+            autoWrap: true,
+            skipHide: true,
             locals: {
                 data: data
             }

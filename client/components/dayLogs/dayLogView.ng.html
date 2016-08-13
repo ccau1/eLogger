@@ -1,29 +1,27 @@
 <div layout="column" layout-fill>
     <head-toolbar>
     </head-toolbar>
-    <md-content layout-fill>
-        <md-tabs md-dynamic-height md-stretch-tabs md-center-tabs md-selected="selectedTab" md-align-tabs="top" layout="column" flex>
-            <md-tab label="Log" layout="column" flex layout-fill>
-                <md-tab-body layout="column" flex>
-                    <!--<md-content layout="column" flex>-->
-                        <logs ng-model="dayLog" date="date" layout-fill></logs>
-                    <!--</md-content>-->
-                </md-tab-body>
+    <md-content layout="column" flex>
+        <md-tabs md-border-bottom md-center-tabs="true" md-stretch-tabs="true" layout="column" layout-fill>
+            <md-tab label="Log" layout="column" flex>
+                <md-tab-content layout="column" flex>
+                    <logs ng-model="dayLog" date="date" layout="column" flex></logs>
+                </md-tab-content>
             </md-tab>
-            <md-tab label="Form">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2">Form</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-                </md-content>
-            </md-tab>
+            <!--<md-tab label="Form">-->
+                <!--<md-content class="md-padding">-->
+                <!--</md-content>-->
+            <!--</md-tab>-->
             <md-tab label="Sign">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2">Sign</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-                </md-content>
+                <md-tab-content layout="column" flex layout-align="start center">
+                    <p>I certify these entries are true and correct</p>
+                    <signature ng-model="dayLog.signature" name="driver" type="log" on-change="signatureChanged(signature)"></signature>
+                </md-tab-content>
             </md-tab>
-            <md-tab label="DVIR" layout-fill>
-                <dvirs date="date" layout-fill></dvirs>
+            <md-tab label="DVIR" layout="column" flex>
+                <md-tab-content layout="column" flex>
+                    <dvirs date="date" layout="column" flex></dvirs>
+                </md-tab-content>
             </md-tab>
         </md-tabs>
     </md-content>

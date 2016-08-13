@@ -1,0 +1,15 @@
+<md-dialog aria-label="Shop Form" ng-cloak flex="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button aria-label="Cancel" ng-click="cancel()">Cancel</md-button>
+            <h2 flex style="text-align: center">{{title}}</h2>
+            <md-button aria-label="Save" ng-click="save()">Save</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div layout="column" layout-align="center">
+            <canvas ng-signature-pad="signature" ng-signature-pad-after="signatureLoaded"></canvas>
+            <md-button ng-click="pad.clear()" ng-disabled="pad.isEmpty()">Clear Signature</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

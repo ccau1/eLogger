@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module(Constants.Module).directive('logs', ['user', 'utils', 'dayLogs', function (user, utils, dayLogs) {
+angular.module(Constants.Module).directive('logs', ['user', 'utils', 'dayLogs', '$timeout', '$mdDialog', function (user, utils, dayLogs, $timeout, $mdDialog) {
 	return {
 		restrict: 'E', // E = element, A = attribute, C = class, M = comment
 		scope: { // @ = local scope (string), = = bi-directional binding, & = parent execution binding (function)
@@ -12,16 +12,65 @@ angular.module(Constants.Module).directive('logs', ['user', 'utils', 'dayLogs', 
 
 		},
 		link: function ($scope, element, attrs) {
-			$scope.changeStatus = function(ev) {
+			$scope.fab = {
+				isOpen: false,
+				tooltipVisible: false
+			};
+
+			$scope.$watch('fab.isOpen', function(isOpen) {
+				if (isOpen) {
+					$timeout(function() {
+						if ($scope.fab.isOpen) // ensure its still open
+							$scope.fab.tooltipVisible = isOpen;
+					}, 600);
+				} else {
+					$scope.fab.tooltipVisible = isOpen;
+				}
+			});
+
+			$scope.toggleListMenu = function(ev) {
+				var ele = $(ev.target).closest('md-list-item');
+				ele.siblings().removeClass('is-menu-open').animate({ marginLeft: 0 });
+				if (ele.hasClass('is-menu-open')) {
+					ele.removeClass('is-menu-open');
+					ele.animate({ marginLeft: 0 });
+				} else {
+					ele.addClass('is-menu-open');
+					var hiddenMenuWidth = $('.hidden-menu', ele).outerWidth();
+					ele.animate({ marginLeft: hiddenMenuWidth });
+				}
+			}
+
+			$scope.editTravelLog = function(ev, travelLog) {
+
+			}
+
+			$scope.deleteTravelLog = function(ev, travelLog) {
+				var confirm = $mdDialog.confirm()
+						.title('Are you sure you want to delete this log entry?')
+						.textContent('This action cannot be undone.')
+						.ariaLabel('Delete Log Entry')
+						.targetEvent(ev)
+						.ok('Delete')
+						.cancel('Cancel');
+				$mdDialog.show(confirm).then(function() {
+					var removeIndex = $scope.dayLog.travelLog.indexOf(travelLog);
+					$scope.dayLog.travelLog.splice(removeIndex, 1);
+					Meteor.call('updateDayLog', $scope.dayLog, function(err) { });
+				}, function() {
+
+				});
+			}
+
+			$scope.addTravelLog = function(ev, type) {
+				$scope.fab.isOpen = $scope.fab.tooltipVisible = false;
 				utils.dialog(ev, 'client/components/logs/logStatusSelectView.ng.html', 'LogStatusSelectController', {
 					title: 'Set Status',
-					lastStatus: $scope.dayLog.lastStatus
+					lastStatus: $scope.dayLog.lastStatus,
+					type: type
 				}).then(function (result) {
-					//console.log('result', result);
-					//$scope.dayLog.lastStatus = result.obj;
-					//$scope.dayLog.travelLog.push({ start: moment().valueOf(), status: result.obj });
-
-					Meteor.call('addDayLogTravelLog', $scope.dayLog._id, result.obj, dayLogs.quarterTime(moment(), Constants.Round.FLOOR).valueOf(), function(err) {
+					var travelLog = result.obj;
+					Meteor.call('addDayLogTravelLog', $scope.dayLog._id, travelLog, function(err) {
 						if (!err) {
 							if (result.obj.status) {
 								utils.toast('Status Changed to: ' + result.obj.status, utils.TOAST_TYPE.SUCCESS);
@@ -37,27 +86,7 @@ angular.module(Constants.Module).directive('logs', ['user', 'utils', 'dayLogs', 
 				});;
 			}
 
-			$scope.getTimeSpan = function(tl) {
-				var curTime = moment();
-
-				var index = lodash.findIndex($scope.dayLog.travelLog, tl);
-				if (index != $scope.dayLog.travelLog.length - 1) {
-					// not last, do diff of start and next start
-					var diff = moment.utc(moment($scope.dayLog.travelLog[index + 1].start) - tl.start + 1000);
-					return dayLogs.displayTime(diff);
-				} else {
-					// last one, just do diff of start and cur time
-					if (moment().isAfter(moment($scope.date).add(1, 'days'))) {
-						// daylog is before today, give diff of start to end of day
-						var diff = moment.utc(dayLogs.quarterTime(moment($scope.date).add(1, 'days'), Constants.Round.CEIL) - tl.start + 1000);
-						return dayLogs.displayTime(diff);
-					} else {
-						// daylog is today, give diff of start to cur time
-						var diff = moment.utc(dayLogs.quarterTime(moment(), Constants.Round.CEIL).valueOf() - tl.start + 1000);
-						return dayLogs.displayTime(diff);
-					}
-				}
-			}
+			$scope.getTimeSpan = dayLogs.getTimeSpan;
 		}
 	}
 }]);

@@ -25,6 +25,11 @@ Schemas.TravelLog = new SimpleSchema({
         type: String,
         optional: true,
         label: 'Note'
+    },
+    location: {
+        type: String,
+        optional: true,
+        label: 'Location'
     }
 });
 
@@ -56,6 +61,11 @@ Schemas.DayLog = new SimpleSchema({
         type: String,
         label: 'Last Status'
     },
+    signature: {
+        type: String,
+        optional: true,
+        label: 'Signature'
+    },
     userId: {
         type: String,
         label: 'User Id',
@@ -82,24 +92,33 @@ DayLogs.attachSchema(Schemas.DayLog);
 
 
 Meteor.methods({
-    addDayLogTravelLog: function(id, travelLog, time, callback) {
+    addDayLogTravelLog: function(id, travelLog, callback) {
         var dl = DayLogs.findOne({ _id: id });
         if (!dl) return false;
 
         // TODO:: need to validate it has either note or status
 
         if (travelLog.status) {
-            var existingTravelLogIndex = lodash.findIndex(dl.travelLog, function(o) { return o.start == travelLog.start && o.status; });
+            var existingTravelLogIndex = lodash.findIndex(dl.travelLog, function(o) {
+                console.log('searching existing', o.start == travelLog.start, o.start, travelLog.start, o.status)
+                return o.start == travelLog.start && o.status;
+            });
             if (existingTravelLogIndex > -1) {
                 dl.travelLog.splice(existingTravelLogIndex, 1);// = _.remove(dl.travelLog, existingTravelLog);
+                console.log('travellog removed previous');
             }
+            dl.lastStatus = travelLog.status;
         }
 
 
         dl.travelLog.push(travelLog);
-        dl.lastStatus = travelLog.status;
 
         dl.travelLog = _.sortBy(dl.travelLog, ['start']);
+
+        if (travelLog.end) {
+
+        }
+
         delete dl._id;
         DayLogs.update({_id: id}, {$set: dl}, callback);
     },

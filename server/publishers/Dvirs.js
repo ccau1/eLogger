@@ -17,9 +17,10 @@ Meteor.publish("dvirById", function (id) {
 
 Meteor.publish("dvirsByDate", function (date) {
     var usr = Meteor.users.findOne({ _id: this.userId });
-    var dayStart = moment(date).startOf('day').valueOf();
-    var dayEnd = moment(date).startOf('day').add(1, 'days').valueOf();
-    var filter = { timestamp: { $gte: dayStart, $lte: dayEnd } };
+    //var dayStart = moment(date).startOf('day').valueOf();
+    //var dayEnd = moment(date).startOf('day').add(1, 'days').valueOf();
+    //var filter = { timestamp: { $gte: dayStart, $lte: dayEnd } };
+    var filter = { forDate: moment(date).startOf('day').valueOf() };
 
     filter = lodash.extend(filter, filterByRole());
     var result = DVIRs.find(filter, { sort: { timestamp: -1 }});

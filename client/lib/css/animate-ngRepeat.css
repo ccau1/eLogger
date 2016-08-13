@@ -1,0 +1,28 @@
+.appear-enter,
+.appear-leave
+{
+    -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space:nowrap;
+}
+
+.appear-leave.appear-leave-active,
+.appear-enter {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+.appear-enter.appear-enter-active,
+.appear-leave {
+    opacity: 1;
+    width: 150px;
+    height: 30px;
+}

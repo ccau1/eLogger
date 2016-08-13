@@ -7,12 +7,48 @@
         </div>
     </md-toolbar>
     <md-dialog-content>
-        <div class="md-dialog-content">
-            <md-button flex="50" class="md-raised" ng-class="{'md-warn': statusObj.status == status.name}" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
+        <div layout-padding>
+            <div ng-if="type == 'status'" layout="row">
+                <md-input-container>
+                    <label>Start</label>
+                    <!--<wy-time-picker-->
+                            <!--data-dropdown-toggle-state="settings.dropdownToggleState"-->
+                            <!--data-time-settings="settings.time"-->
+                            <!--data-theme="settings.theme"-->
+                            <!--data-no-range="settings.noRange"-->
+                            <!--data-format="settings.format"-->
+                            <!--data-no-validation="settings.noValidation"-->
+                            <!--data-apply-callback="onApplyTimePicker()"-->
+                            <!--data-clear-callback="onClearTimePicker()">-->
+                    <!--</wy-time-picker>-->
+                </md-input-container>
+                <!--<md-input-container class="md-block" flex>-->
+                    <!--<label>Start</label>-->
+                    <!--<input ng-model="travelLog.start" placeholder="Start">-->
+                <!--</md-input-container>-->
+                <md-input-container class="md-block" flex>
+                    <label>End</label>
+                    <input ng-model="travelLog.end" placeholder="End">
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block" ng-if="type == 'remark'">
+                <label>Time</label>
+                <input ng-model="travelLog.start" placeholder="Time">
+            </md-input-container>
+
+            <div ng-if="type != 'remark'" layout="row" layout-align="center center">
+                <div flex layout="row" layout-align="center center">
+                    <md-button class="md-fab md-mini" ng-class="{'md-primary': travelLog.status == status.name}" ng-disabled="type == 'currentStatus' && status.name == lastStatus" ng-repeat="status in statuses" aria-label="{{status.name}}" ng-click="setStatus(status.name)" ng-bind="status.name"></md-button>
+                </div>
+            </div>
+            <md-input-container class="md-block">
+                <label>Location</label>
+                <input ng-model="travelLog.location" placeholder="Location">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Notes</label>
+                <input ng-model="travelLog.note" placeholder="Notes">
+            </md-input-container>
         </div>
-        <md-input-container class="md-block">
-            <label>Notes</label>
-            <input ng-model="statusObj.note" placeholder="Notes">
-        </md-input-container>
     </md-dialog-content>
 </md-dialog>

@@ -157,7 +157,11 @@ angular.module(Constants.Module).config(['$stateProvider', function ($stateProvi
             },
             data: {pageTitle: 'Logs', backView: { go: 'dayLogs', params: {}}},
             resolve: lodash.assign(baseResolve, {
-
+                pageSubTitle: ['$stateParams', function($stateParams) {
+                    if ($stateParams.date) {
+                        this.data.pageTitle = moment($stateParams.date).format('LL');
+                    }
+                }]
             })
         })
         // .state('logs', {

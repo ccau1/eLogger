@@ -3,10 +3,11 @@ import angularMeteor from 'angular-meteor';
 import '/lib/Constants.js';
 import formly from 'angular-formly';
 import formlyMaterial from 'angular-formly-material';
+import sigPad from 'signature_pad';
 //import angularMaterialDataTable from 'angular-material-data-table';
 //import angularGoogleMaps from 'angular-google-maps';
 //import NemLogging from 'angular-simple-logger';
-
+window['SignaturePad'] = sigPad;
 mainApp = angular.module(Constants.Module, [
     angularMeteor,
     //"angular-meteor",
@@ -17,11 +18,13 @@ mainApp = angular.module(Constants.Module, [
     'ngImgCrop',
     'formly',
     'formlyMaterial',
+    'wingify.timePicker',
     //'md.data.table',
     //'nemLogging',
     //NemLogging,
     //'uiGmapgoogle-maps',
     //angularGoogleMaps,
+    'ngSignaturePad',
 ]);
 
 mainApp.run(['formlyConfig', function(formlyConfig) {

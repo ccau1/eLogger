@@ -1,13 +1,22 @@
 <div layout="column" flex>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button aria-label="Cancel">Cancel</md-button>
+            <md-button aria-label="Cancel" ng-click="cancel()">Cancel</md-button>
             <h2>Vehicle Defects</h2>
             <span flex></span>
-            <md-button aria-label="Save">Save</md-button>
+            <md-button aria-label="Save" ng-click="save()">Save</md-button>
         </div>
     </md-toolbar>
     <md-content flex>
-
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="availableDefect in availableDefects track by $index" ng-init="defects[$index].name = availableDefect">
+                <md-checkbox ng-model="defects[$index].selected" aria-label="Toggle {{availableDefect}}" ng-click="toggleDefect($index)">
+                </md-checkbox>
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{$index + 1}} - {{availableDefect}}</h3>
+                    <input type="text" class="simple" ng-if="defects[$index].selected" ng-model="defects[$index].note" placeholder="Notes" ng-click="stopProp($event)" />
+                </div>
+            </md-list-item>
+        </md-list>
     </md-content>
 </div>

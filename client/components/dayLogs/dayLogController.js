@@ -11,7 +11,14 @@ angular.module(Constants.Module).controller('DayLogController', ['$scope', 'user
         return [$stateParams.date];
     });
 
+    $scope.signatureChanged = function(sig) {
+        $scope.dayLog.signature = sig;
+        $scope.save();
+    }
 
+    $scope.save = function() {
+        Meteor.call('updateDayLog', $scope.dayLog, function(err) { });
+    }
 
     $scope.helpers({
         dayLog: function() {

@@ -1,24 +1,75 @@
-﻿<md-list style="padding: 0;" layout-fill>
-    <md-list-item class="md-3-line" ng-repeat="tl in dayLog.travelLog" ng-click="selectDate(tl)">
-        <div layout="row">
-            <md-badge class="circle" style="margin-right: 15px; width: 19px;">{{tl.status}}</md-badge>
-            <div class="md-list-item-text">
-                <h3>{{tl.start | date: 'h:mm a'}}</h3>
-                <p><i class="fa fa-clock-o"></i> {{ getTimeSpan(tl) }}</p>
+﻿<md-content layout="column" layout-fill style="background: #e6e6e6;">
+    <md-list class="slide-menu" style="padding: 0;">
+        <md-list-item ng-repeat="tl in dayLog.travelLog" ng-click="toggleListMenu($event)" style="background: #fff;">
+            <div class="hidden-menu" layout="row">
+                <a style="background: #0074D9; color: #fff;" ng-click="editTravelLog($event, tl)" layout="column" layout-padding layout-align="center center">Edit</a>
+                <a ng-if="!tl.status" style="background: #313131; color: #fff;" ng-click="deleteTravelLog($event, tl)" layout="column" layout-padding layout-align="center center">Delete</a>
             </div>
-        </div>
-        <span flex></span>
-    </md-list-item>
-</md-list>
-<md-fab-speed-dial ng-cloak md-open="false" md-direction="up" class="md-fling" style="position: absolute; bottom: 10px; right: 10px;">
-    <md-fab-trigger>
-        <md-button aria-label="menu" class="md-fab md-warn">
-            <md-icon md-svg-src="img/icons/ic_add_white_24px.svg"></md-icon>
-        </md-button>
-    </md-fab-trigger>
-    <md-fab-actions aria-hidden="true">
-        <md-button aria-label="Change Status" class="md-fab md-raised md-mini" ng-click="changeStatus($event)">
-            <md-icon md-svg-src="img/icons/ic_rotate_right_black_24px.svg" aria-label="Change Status"></md-icon>
-        </md-button>
-    </md-fab-actions>
-</md-fab-speed-dial>
+            <div layout="column" layout-align="start start" style="padding: 10px;">
+                <div layout="row">
+                    <md-badge ng-if="tl.status" class="circle mini" style="margin-right: 14px;">{{tl.status}}</md-badge>
+                    <span ng-if="!tl.status" class="fa fa-bookmark" style="color: #717171; font-size: 16pt;padding: 7px 19px 7px 6px;"></span>
+                    <!--<md-icon ng-if="!tl.status" md-svg-src="img/icons/ic_close_black_24px.svg"></md-icon>-->
+                    <b>{{tl.start | date: 'h:mm a'}}</b>
+                <span ng-if="tl.status">
+                    &nbsp;|&nbsp;{{ getTimeSpan(dayLog, tl) }}
+                </span>
+                </div>
+                <div layout="row" ng-if="tl.location">
+                    <span class="fa fa-map-marker" style="color: #9c9c9c; font-size: 16pt;padding: 7px 19px 7px 6px;"></span>
+                    <!--<md-icon md-svg-src="img/icons/ic_location_on_black_24px.svg"></md-icon>-->
+                    <span ng-bind="tl.location"></span>
+                </div>
+                <div layout="row" ng-if="tl.note">
+                    <span class="fa fa-pencil" style="color: #9c9c9c; font-size: 16pt;padding: 7px 15px 7px 3px;"></span>
+                    <!--<md-icon md-svg-src="img/icons/ic_edit_black_24px.svg"></md-icon>-->
+                    <span ng-bind="tl.note"></span>
+                </div>
+            </div>
+            <!--<div layout="row" flex>-->
+                <!--<md-badge class="circle" style="margin-right: 15px; width: 19px;">{{tl.status}}</md-badge>-->
+                <!--<div class="md-list-item-text">-->
+                    <!--<h3>{{tl.start | date: 'h:mm a'}}</h3>-->
+                    <!--<p><i class="fa fa-clock-o"></i> {{ getTimeSpan(dayLog, tl) }}</p>-->
+                <!--</div>-->
+                <!--<span flex></span>-->
+                <!--<div layout="row" layout-align="end center">-->
+                    <!--<md-button class="md-icon-button" aria-label="Edit" ng-click="editTravelLog($event, dayLog)"><md-icon md-svg-src="img/icons/ic_edit_black_24px.svg"></md-icon></md-button>-->
+                    <!--<md-button class="md-icon-button" aria-label="Delete" ng-click="deleteTravelLog($event, dayLog)"><md-icon md-svg-src="img/icons/ic_close_black_24px.svg"></md-icon></md-button>-->
+                <!--</div>-->
+            <!--</div>-->
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <div ng-cloak>
+        <md-fab-speed-dial ng-cloak md-open="fab.isOpen" md-direction="up" class="md-fling md-fab-bottom-right" style="position: fixed;">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-warn">
+                    <md-icon md-svg-src="img/icons/ic_add_white_24px.svg"></md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Change Status" class="md-fab md-raised md-mini" ng-click="addTravelLog($event, 'currentStatus')">
+                    <md-tooltip md-direction="left" md-visible="fab.tooltipVisible" md-autohide="false">
+                        Change Current Duty Status
+                    </md-tooltip>
+                    <md-icon md-svg-src="img/icons/ic_rotate_right_black_24px.svg" aria-label="Change Status"></md-icon>
+                </md-button>
+                <div>
+                    <md-button aria-label="Change Status" class="md-fab md-raised md-mini" ng-click="addTravelLog($event, 'status')">
+                        <md-tooltip md-direction="left" md-visible="fab.tooltipVisible" md-autohide="false">
+                            Insert Past Duty Status
+                        </md-tooltip>
+                        <md-icon md-svg-src="img/icons/ic_merge_type_black_24px.svg" aria-label="Change Status"></md-icon>
+                    </md-button>
+                </div>
+                <md-button aria-label="Change Status" class="md-fab md-raised md-mini" ng-click="addTravelLog($event, 'remark')">
+                    <md-tooltip md-direction="left" md-visible="fab.tooltipVisible" md-autohide="false">
+                        Add Remark
+                    </md-tooltip>
+                    <md-icon md-svg-src="img/icons/ic_bookmark_black_24px.svg" aria-label="Change Status"></md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </div>
+</md-content>

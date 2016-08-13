@@ -22,7 +22,6 @@ Meteor.publish("dayLogByDate", function (date) {
 
     filter = lodash.extend(filter, filterByRole());
     var result = DayLogs.find(filter);
-    console.log('dayLogByDate result', result.fetch().length, result.fetch());
     if (result.fetch().length == 0) {
         var lastDayLog = DayLogs.findOne({ date: { $lt: datestamp } }, { sort: { date: -1 } });
         var lastStatus = lastDayLog ? lastDayLog.lastStatus : Constants.Log.Status.OFF;

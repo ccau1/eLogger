@@ -1,4 +1,4 @@
-DVIRs = new Mongo.Collection('Dvirs');
+DVIRs = new Mongo.Collection('dvirs');
 
 DVIRs.allow({
     insert: function(userId, doc) {
@@ -15,14 +15,15 @@ Schemas.Defect = new SimpleSchema({
         type: String,
         label: 'Name'
     },
-    comment: {
+    note: {
         type: String,
-        defaultValue: '',
-        label: 'Comment'
+        //defaultValue: '',
+        optional: true,
+        label: 'Note'
     }
 });
 
-Schemas.DefectReport = new SimpleSchema({
+Schemas.VehicleDefectReport = new SimpleSchema({
     componentId: {
         type: String,
         label: "Component ID"
@@ -31,6 +32,31 @@ Schemas.DefectReport = new SimpleSchema({
         type: [Schemas.Defect],
         defaultValue: [],
         label: 'Defect'
+    }
+});
+
+Schemas.TrailerDefectReport = new SimpleSchema({
+    componentIds: {
+        type: [String],
+        defaultValue: [],
+        label: "Component ID"
+    },
+    defects: {
+        type: [Schemas.Defect],
+        defaultValue: [],
+        label: 'Defect'
+    }
+});
+
+Schemas.DVIR_Signatures = new SimpleSchema({
+    driver: {
+        type: String,
+        label: 'Driver Signature'
+    },
+    mechanic: {
+        type: String,
+        optional: true,
+        label: 'Mechanic Signature'
     }
 });
 
@@ -47,6 +73,13 @@ Schemas.DVIR = new SimpleSchema({
         },
         label: 'Timestamp'
     },
+    forDate: {
+        type: Number,
+        autoValue: function() {
+            if (!this.value) return moment().startOf('day').valueOf();
+        },
+        label: 'For Date'
+    },
     carrier: {
         type: String,
         label: 'Carrier'
@@ -60,12 +93,26 @@ Schemas.DVIR = new SimpleSchema({
         label: 'Odometer'
     },
     vehicle: {
-        type: Schemas.DefectReport,
+        type: Schemas.VehicleDefectReport,
         label: 'Vehicle'
     },
     trailer: {
-        type: Schemas.DefectReport,
+        type: Schemas.TrailerDefectReport,
         label: 'Trailer'
+    },
+    defectsCorrected: {
+        type: Boolean,
+        defaultValue: false,
+        label: 'Defects Corrected'
+    },
+    defectsNeedNotCorrect: {
+        type: Boolean,
+        defaultValue: false,
+        label: 'Defects Need Not Correct'
+    },
+    signatures: {
+        type: Schemas.DVIR_Signatures,
+        label: 'Signatures'
     },
     userId: {
         type: String,
@@ -80,8 +127,9 @@ Schemas.DVIR = new SimpleSchema({
         label: 'Company ID',
         autoValue: function() {
             // TODO:: for some reason _id throws error...but inserts company id properly
-            if (!this.value && Meteor.isServer) {
+            if (!this.value) {
                 var usr = Meteor.user();
+
                 return Companies.findOne({ _id: usr.profile.companyId })._id;
             }
         },

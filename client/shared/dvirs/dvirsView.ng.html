@@ -1,6 +1,74 @@
-﻿<md-card ng-repeat="dvir in dvirs">
-    {{dvir._id}}
-</md-card>
-<md-button class="md-fab" aria-label="Add DVIR" ng-click="addDVIR($event)" style="position: absolute; bottom: 10px; right: 10px;">
+﻿<md-content layout="column" flex style="background: #e6e6e6;">
+    <md-card ng-repeat="dvir in dvirs" ng-animate="'appear'" style="display: block;">
+        <div layout="row">
+            <md-card-header flex>
+                <md-card-header-text layout="row" layout-align="center center">
+                    <i class="fa fa-clock-o" style="font-size: 15pt; margin-right: 10px;"></i>
+                    <div layout="column" flex>
+                        <h3 class="md-title" style="margin: 0;">
+                            {{ dvir.timestamp | date: 'shortTime' }}
+                        </h3>
+                        <small ng-if="!isToday(dvir.timestamp)" ng-bind="dvir.timestamp | date: 'shortDate'"></small>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="edit($event, dvir)">Edit</md-button>
+                <md-button ng-click="delete($event, dvir)">Delete</md-button>
+            </md-card-actions>
+        </div>
+        <md-card-content>
+            <a ng-click="edit($event, dvir, 'vehicle')" md-ink-ripple>
+                <div layout="row" layout-align="center center">
+                    <h3>Vehicle</h3>
+                    <span flex></span>
+                    <span ng-bind="dvir.vehicle.componentId"></span>
+                </div>
+                <md-divider></md-divider>
+                <md-list class="md-dense">
+                    <div ng-if="!dvir.vehicle.defects.length" style="color: rgba(183, 177, 177, 0.87);" layout-align="center" layout="row"><span class="fa fa-wrench"></span>&nbsp;No Defects Found</div>
+                    <md-list-item class="md-2-line" ng-repeat="defect in dvir.vehicle.defects" style="min-height: 45px;">
+                        <div class="md-list-item-text" layout="column" style="margin: 0 !important;">
+                            <h3 ng-bind="defect.name"></h3>
+                            <p ng-bind="defect.note"></p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </a>
+
+            <a ng-click="edit($event, dvir, 'vehicle')" md-ink-ripple>
+                <div layout="row" layout-align="center center">
+                    <h3>Trailer</h3>
+                    <span flex></span>
+                    <span ng-repeat="cId in dvir.trailer.componentIds">{{cId}}{{$last ? '' : ', '}}</span>
+                </div>
+                <md-divider></md-divider>
+                <md-list class="md-dense">
+                    <div ng-if="!dvir.trailer.defects.length" style="color: rgba(183, 177, 177, 0.87);" layout-align="center" layout="row"><span class="fa fa-wrench"></span>&nbsp;No Defects Found</div>
+                    <md-list-item class="md-2-line" ng-repeat="defect in dvir.trailer.defects" style="min-height: 45px;">
+                        <div class="md-list-item-text" layout="column" style="margin: 0 !important;">
+                            <h3 ng-bind="defect.name"></h3>
+                            <p ng-bind="defect.note"></p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </a>
+            <br />
+            <a ng-click="edit($event, dvir, 'sign')" md-ink-ripple>
+                <div ng-if="dvir.defectsCorrected" class="success" layout="row" layout-padding layout-align="center center"><span>Defects Corrected</span></div>
+                <div ng-if="dvir.defectsNeedNotCorrect" class="success" layout="row" layout-padding layout-align="center center"><span>Defects Need Not Be Corrected</span></div>
+                <div layout="row" layout-align="center center">
+                    <div ng-if="dvir.signatures.driver" layout="row" layout-align="center" layout-padding flex class="md-whiteframe-1dp">
+                        <i class="fa fa-check success-text"></i> <span>Driver</span>
+                    </div>
+                    <div ng-if="dvir.signatures.mechanic" layout="row" layout-align="center" layout-padding flex class="md-whiteframe-1dp">
+                        <i class="fa fa-check success-text"></i> <span>Mechanic</span>
+                    </div>
+                </div>
+            </a>
+        </md-card-content>
+    </md-card>
+</md-content>
+<md-button class="md-fab" aria-label="Add DVIR" ng-click="addDVIR($event)" style="position: fixed; bottom: 10px; right: 10px;">
     <md-icon md-svg-src="img/icons/ic_add_white_24px.svg"></md-icon>
 </md-button>

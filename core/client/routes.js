@@ -1,7 +1,7 @@
 angular.module(Constants.Module).config(['$stateProvider', '$urlRouterProvider', 'settingsProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, settingsProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/dayLogs");
 
     let baseResolve = {
         currentUser: ['$q', function ($q) {

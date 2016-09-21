@@ -10,29 +10,20 @@ angular.module(Constants.Module).factory('dayLogs', ['$rootScope', '$reactive', 
         return (hrs > 0 ? hrs + ' hr ' : '') + (time.get('minute') > 0 ? time.get('minute') + ' min ' : '');
     }
 
-    function quarterTime(time, roundType) {
+    function quarterTime(time, roundType, interval) {
+        if (!interval) interval = 5;
         time.set('second', 0);
         time.set('millisecond', 0);
 
         var min = time.get('minute');
-        var newMin = 0;
 
-        if (min < 15) {
-            newMin = 0;
-        } else if (min < 30) {
-            newMin = 15;
-        } else if (min < 45) {
-            newMin = 30;
-        } else if (min < 60) {
-            newMin = 45;
-        }
+        var newM = min - (min % interval);
 
         if (roundType == Constants.Round.CEIL) {
-            newMin += 15;
-            if (newMin == 60) newMin = 0;
+            newM += interval;
         }
 
-        return time.set('minute', newMin);
+        return time.set('minute', newM);
     }
 
     var getTimeSpan = function(dayLog, tl) {
